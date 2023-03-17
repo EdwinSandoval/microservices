@@ -1,2 +1,18 @@
 server:
-  port:8080
+port: 8080
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/EdwinSandoval/microservices.git"
+          username: ${GIT_USERNAME}
+          password: ${GIT_PASSWORD}
+          default-label: main
+          search-paths: usuario-service
+
+  security:
+    user:
+      name: root
+      password: 123
