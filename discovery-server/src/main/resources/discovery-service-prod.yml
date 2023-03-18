@@ -3,11 +3,7 @@ spring:
     name: discovery-server
   cloud:
     config:
+      profile: prod
       uri: http://localhost:8080
       username: root
       password: 123
-  profiles:
-    active: prod
-#      profile: prod
-
-
