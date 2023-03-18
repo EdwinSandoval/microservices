@@ -1,50 +1,39 @@
+
+server:
+   port: 8081
+
 spring:
-  application:
-    name: usuario-service
 
-  cloud:
-    config:
-      uri: http://localhost:8081
-      username: root
-      password: s3cr3t
-      profile: dev
-
-
-#server:
-#   port: 8081
-#
-#spring:
-#
-##  datasource:
-##    url: jdbc:mysql://localhost:3306/usuario2
-##    username: root
-##    password: sandoval
-#  profiles:
-#        active: prod
-#
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#    show-sql: true
-#---
-#spring:
-#
-#  profile: dev
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/usuario
-#    username: root
-#    password: sandoval
-#
-#---
-#spring:
-#
-#  profile: prueba
 #  datasource:
 #    url: jdbc:mysql://localhost:3306/usuario2
 #    username: root
 #    password: sandoval
-#
-#appDescription: "Pragma usuario"
-##appVersion: "1.0.0"
-#
-##//LOS ESPACIOS ENTRE ETIQUETAS SON MUY IMPORTANTES
+  profiles:
+        active: prod
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+---
+spring:
+
+  profile: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/usuario
+    username: root
+    password: sandoval
+
+---
+spring:
+
+  profile: prueba
+  datasource:
+    url: jdbc:mysql://localhost:3306/usuario2
+    username: root
+    password: sandoval
+
+appDescription: "Pragma usuario"
+#appVersion: "1.0.0"
+
+#//LOS ESPACIOS ENTRE ETIQUETAS SON MUY IMPORTANTES
