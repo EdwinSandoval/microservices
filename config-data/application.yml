@@ -1,0 +1,21 @@
+server:
+  port: 8090
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/usuario
+    username: root
+    password: sandoval
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+#
+#  data:
+#    mongodb:
+#      uri: mongodb+srv://Dalmope:0b1lP72uy4APkMqq@cluster0.5evuc.mongodb.net/test
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8099/eureka

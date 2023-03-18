@@ -1,13 +1,12 @@
+
 spring:
   application:
-    name: discovery-server
+    name: discovery-service
   cloud:
     config:
-      uri: http://localhost:8080
+      uri: http://localhost:8090
       username: root
       password: 123
-  profiles:
-    active: prod
-#      profile: prod
+      profile: prod
 
 
