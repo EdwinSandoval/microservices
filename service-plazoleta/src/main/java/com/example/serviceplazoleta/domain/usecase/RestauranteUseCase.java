@@ -16,8 +16,8 @@ public class RestauranteUseCase implements IRestauranteServicePort {
     }
 
     @Override
-    public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
-         return restaurantePersistencePort.guardarRestaurante(restauranteModel);
+    public void guardarRestaurante(RestauranteModel restauranteModel) {
+         restaurantePersistencePort.guardarRestaurante(restauranteModel);
     }
 
     @Override
@@ -25,8 +25,8 @@ public class RestauranteUseCase implements IRestauranteServicePort {
         return restaurantePersistencePort.listarRestaurantes();
     }
 
-    @Override
-    public RestauranteResponseDto ObtenerRestauranteId(Long idRest) {
-        return restaurantePersistencePort.ObtenerRestauranteId(idRest);
-    }
+//    @Override
+//    public RestauranteResponseDto ObtenerRestauranteId(Long idRest) {
+//        return restaurantePersistencePort.ObtenerRestauranteId(idRest);
+//    }
 }

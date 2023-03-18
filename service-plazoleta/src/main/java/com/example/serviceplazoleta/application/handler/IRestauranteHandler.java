@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface IRestauranteHandler {
 
-    RestauranteResponseDto guardarRestaurante(RestauranteRequestDto restauranteRequestDto);
+    void guardarRestaurante(RestauranteRequestDto restauranteRequestDto);
 
     List<RestauranteResponseDto> listarRestaurantes();
 
-    RestauranteResponseDto ObtenerRestauranteId(Long idRest);
+//    RestauranteResponseDto ObtenerRestauranteId(Long idRest);
 }

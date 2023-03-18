@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface IRestauranteServicePort {
 
-    RestauranteModel guardarRestaurante(RestauranteModel restauranteModel);
+    void guardarRestaurante(RestauranteModel restauranteModel);
 
     List<RestauranteModel> listarRestaurantes();
 
-    RestauranteResponseDto ObtenerRestauranteId(Long idRest);
+//    RestauranteResponseDto ObtenerRestauranteId(Long idRest);
 }

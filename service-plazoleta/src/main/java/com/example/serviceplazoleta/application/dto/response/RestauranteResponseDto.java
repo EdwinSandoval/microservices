@@ -13,18 +13,20 @@ import lombok.Setter;
 @Setter
 public class RestauranteResponseDto {
 
-//    private Long id;
-//
-//    private String nombre;
-//
-//    private String direccion;
-//
-//    private String telefono;
-//
-//    private String urlLogo;
-//
-//    private String nit;
-    private RestauranteModel restauranteModel;
-    private UserResponseDto userResponseDto;
+    private Long id;
+
+    private String nombre;
+
+    private String direccion;
+
+    private String telefono;
+
+    private String urlLogo;
+
+    private String nit;
+
+    private Long idPropietario;
+//    private RestauranteModel restauranteModel;
+//    private UserResponseDto userResponseDto;
 
 }

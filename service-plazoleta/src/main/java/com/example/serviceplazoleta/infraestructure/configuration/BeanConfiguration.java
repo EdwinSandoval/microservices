@@ -1,5 +1,6 @@
 package com.example.serviceplazoleta.infraestructure.configuration;
 
+import com.example.serviceplazoleta.ConectionMicroservices.UserRestaurant.IUserRestaurante;
 import com.example.serviceplazoleta.domain.api.ICategoriaServicePort;
 import com.example.serviceplazoleta.domain.api.IPedidoServicePort;
 import com.example.serviceplazoleta.domain.api.IPlatoServicePort;
@@ -85,10 +86,11 @@ public class BeanConfiguration {
     private final IRestauranteRepository restauranteRepository;
     private final IRestauranteEntityMapper restauranteEntityMapper;
     private final RestTemplate restTemplate;
+    private final IUserRestaurante iUserRestaurante;
     @Bean
     public IRestaurantePersistencePort restaurantePersistencePort() {
 
-        return new RestauranteJpaAdapter(restauranteRepository, restauranteEntityMapper,restTemplate);
+        return new RestauranteJpaAdapter(restauranteRepository, restauranteEntityMapper,iUserRestaurante,restTemplate);
     }
 
     @Bean

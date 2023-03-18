@@ -16,7 +16,8 @@ server:
   port: 8082
 
 spring:
-
+  application:
+    name: plazoleta-service
   profiles:
     active: dev
 
@@ -24,6 +25,13 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+eureka:
+  #  client:
+  #    fetch-registry: false
+  #    register-with-eureka: false
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
 appDescription: "Pragma usuario"
 
 ---

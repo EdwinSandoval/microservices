@@ -25,9 +25,9 @@ public class RestauranteHandler  implements IRestauranteHandler {
 
 //    private final RestTemplate restTemplate;
     @Override
-    public RestauranteResponseDto guardarRestaurante(RestauranteRequestDto restauranteRequestDto) {
+    public void guardarRestaurante(RestauranteRequestDto restauranteRequestDto) {
         RestauranteModel restauranteModel = restauranteRequestMapper.toRestaurante(restauranteRequestDto);
-        return  restauranteResponseMapper.toResponse(restauranteServicePort.guardarRestaurante(restauranteModel)) ;
+        restauranteServicePort.guardarRestaurante(restauranteModel);
     }
 
     @Override
@@ -35,11 +35,11 @@ public class RestauranteHandler  implements IRestauranteHandler {
         return restauranteResponseMapper.toResponseList(restauranteServicePort.listarRestaurantes());
     }
 
-    @Override
-    public RestauranteResponseDto ObtenerRestauranteId(Long idRest) {
-        RestauranteResponseDto restauranteResponseDto=restauranteServicePort.ObtenerRestauranteId(idRest);
-        return restauranteResponseDto;
-    }
+//    @Override
+//    public RestauranteResponseDto ObtenerRestauranteId(Long idRest) {
+//        RestauranteResponseDto restauranteResponseDto=restauranteServicePort.ObtenerRestauranteId(idRest);
+//        return restauranteResponseDto;
+//    }
 
 
 

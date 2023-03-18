@@ -1,29 +1,40 @@
-server:
-   port: 8083
 
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
 spring:
+  application:
+    name: servicio-eureka-server
+server:
+  port: 8761
 
-  #  datasource:
-  #    url: jdbc:mysql://localhost:3306/usuario2
-  #    username: root
-  #    password: sandoval
-  profiles:
-     active: prod
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
-
+#server:
+#   port: 8083
+#
 #spring:
-#  application:
-#    name: discovery-service
-#  cloud:
-#    config:
-#      uri: http://localhost:8090
-#      username: root
-#      password: 123
-#      profile: prod
+#
+#  #  datasource:
+#  #    url: jdbc:mysql://localhost:3306/usuario2
+#  #    username: root
+#  #    password: sandoval
+#  profiles:
+#     active: prod
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#
+#
+##spring:
+##  application:
+##    name: discovery-service
+##  cloud:
+##    config:
+##      uri: http://localhost:8090
+##      username: root
+##      password: 123
+##      profile: prod
 
 

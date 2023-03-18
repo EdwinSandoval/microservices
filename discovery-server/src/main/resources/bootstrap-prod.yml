@@ -1,6 +1,6 @@
-spring:
-  profile: prod
-  datasource:
-    url: jdbc:mysql://localhost:3306/usuario
-    username: root
-    password: sandoval
+#spring:
+#  profile: prod
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/usuario
+#    username: root
+#    password: sandoval

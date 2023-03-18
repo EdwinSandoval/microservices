@@ -29,9 +29,9 @@ public class RestauranteRestController {
         return ResponseEntity.ok(restauranteHandler.listarRestaurantes());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RestauranteResponseDto> getUserId(@PathVariable(name = "id") Long id){
-        return ResponseEntity.ok(restauranteHandler.ObtenerRestauranteId(id));
-
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<RestauranteResponseDto> getUserId(@PathVariable(name = "id") Long id){
+//        return ResponseEntity.ok(restauranteHandler.ObtenerRestauranteId(id));
+//
+//    }
 }
