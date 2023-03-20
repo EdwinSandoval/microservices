@@ -1,5 +1,6 @@
 package com.example.serviceplazoleta.application.dto.request;
 
+import com.example.serviceplazoleta.application.dto.response.CategoriaResponseDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,5 +16,10 @@ public class PlatoRequestDto {
 
     private String urlImagen;
 
-    private String activo;
+    private boolean activo=true;
+
+    private PlatoCategoriaRequestdto categoria;
+
+    private PlatoRestauranteRequestDto restaurante;
+
 }

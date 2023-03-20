@@ -17,11 +17,11 @@ public class RestauranteRestController {
 
     private final IRestauranteHandler restauranteHandler;
 
-    @PostMapping("/")
-    public ResponseEntity<Void> guardarRestaurante(@RequestBody RestauranteRequestDto restauranteRequestDto) {
-        restauranteHandler.guardarRestaurante(restauranteRequestDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+//    @PostMapping("/")
+//    public ResponseEntity<Void> guardarRestaurante(@RequestBody RestauranteRequestDto restauranteRequestDto) {
+//        restauranteHandler.guardarRestaurante(restauranteRequestDto);
+//        return new ResponseEntity<>(HttpStatus.CREATED);
+//    }
 
     @GetMapping("/")
     public ResponseEntity<List<RestauranteResponseDto>> listarRestaurantes() {

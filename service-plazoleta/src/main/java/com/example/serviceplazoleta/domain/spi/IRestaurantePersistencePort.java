@@ -8,7 +8,7 @@ import java.util.List;
 public interface IRestaurantePersistencePort {
 
 
-    void guardarRestaurante(RestauranteModel restauranteModel);
+//    RestauranteModel guardarRestaurante(RestauranteModel restauranteModel);
 
     List<RestauranteModel> listarRestaurantes();
 

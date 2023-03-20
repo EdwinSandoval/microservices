@@ -17,5 +17,9 @@ public class PlatoResponseDto {
 
     private String urlImagen;
 
-    private String activo;
+    private boolean activo=true;
+
+    private CategoriaResponseDto categoria;
+
+    private RestauranteResponseDto restaurante;
 }

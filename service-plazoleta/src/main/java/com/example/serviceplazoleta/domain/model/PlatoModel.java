@@ -21,5 +21,9 @@ public class PlatoModel {
 
     private String urlImagen;
 
-    private String activo;
+    private boolean activo;
+
+    private CategoriaModel idCategoria;
+
+    private RestauranteModel idRestaurante;
 }

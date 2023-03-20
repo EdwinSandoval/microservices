@@ -15,10 +15,10 @@ public class RestauranteUseCase implements IRestauranteServicePort {
         this.restaurantePersistencePort = restaurantePersistencePort;
     }
 
-    @Override
-    public void guardarRestaurante(RestauranteModel restauranteModel) {
-         restaurantePersistencePort.guardarRestaurante(restauranteModel);
-    }
+//    @Override
+//    public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
+//         return restaurantePersistencePort.guardarRestaurante(restauranteModel);
+//    }
 
     @Override
     public List<RestauranteModel> listarRestaurantes() {

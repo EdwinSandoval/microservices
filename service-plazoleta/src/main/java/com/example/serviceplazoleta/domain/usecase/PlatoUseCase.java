@@ -21,6 +21,7 @@ public class PlatoUseCase implements IPlatoServicePort {
 
     @Override
     public List<PlatoModel> listarPlatos() {
+
         return platoPersistencePort.listarPlatos();
     }
 }

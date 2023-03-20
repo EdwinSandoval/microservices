@@ -39,7 +39,7 @@ spring:
 
   profile: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/plazoleta
+    url: jdbc:mysql://localhost:3306/plazoleta2
     username: root
     password: sandoval
 

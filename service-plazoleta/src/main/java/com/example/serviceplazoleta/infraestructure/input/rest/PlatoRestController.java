@@ -17,13 +17,13 @@ public class PlatoRestController {
 
     private final IPlatoHandler platoHandler;
 
-    @PostMapping("/")
+    @PostMapping("/guardar")
     public ResponseEntity<Void> guardarPlato(@RequestBody PlatoRequestDto platoRequestDto) {
         platoHandler.guardarPlato(platoRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("/listar")
     public ResponseEntity<List<PlatoResponseDto>> listarPlatos() {
 
         return ResponseEntity.ok(platoHandler.listarPlatos());

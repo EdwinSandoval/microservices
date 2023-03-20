@@ -25,4 +25,5 @@ public class UsuarioModel {
 
     private String dni;
 
+
 }

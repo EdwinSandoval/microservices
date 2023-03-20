@@ -1,6 +1,5 @@
 package com.example.serviceplazoleta.infraestructure.configuration;
 
-import com.example.serviceplazoleta.ConectionMicroservices.UserRestaurant.IUserRestaurante;
 import com.example.serviceplazoleta.domain.api.ICategoriaServicePort;
 import com.example.serviceplazoleta.domain.api.IPedidoServicePort;
 import com.example.serviceplazoleta.domain.api.IPlatoServicePort;
@@ -28,7 +27,6 @@ import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IRestaura
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @RequiredArgsConstructor
@@ -85,12 +83,12 @@ public class BeanConfiguration {
 
     private final IRestauranteRepository restauranteRepository;
     private final IRestauranteEntityMapper restauranteEntityMapper;
-    private final RestTemplate restTemplate;
-    private final IUserRestaurante iUserRestaurante;
+//    private final RestTemplate restTemplate;
+//    private final IUserRestaurante iUserRestaurante;
     @Bean
     public IRestaurantePersistencePort restaurantePersistencePort() {
 
-        return new RestauranteJpaAdapter(restauranteRepository, restauranteEntityMapper,iUserRestaurante,restTemplate);
+        return new RestauranteJpaAdapter(restauranteRepository, restauranteEntityMapper);
     }
 
     @Bean
@@ -98,5 +96,22 @@ public class BeanConfiguration {
 
         return new RestauranteUseCase(restaurantePersistencePort());
     }
+
+
+//    private final IRestauranteRepository restauranteRepository;
+//    private final IRestauranteEntityMapper restauranteEntityMapper;
+//    //    private final RestTemplate restTemplate;
+////    private final IUserRestaurante iUserRestaurante;
+//    @Bean
+//    public IUserRestaurante irestaurantePersistencePort() {
+//
+//        return new RestauranteJpaAdapter(restauranteRepository, restauranteEntityMapper);
+//    }
+//
+//    @Bean
+//    public IRestauranteServicePort restauranteServicePort() {
+//
+//        return new RestauranteUseCase(restaurantePersistencePort());
+//    }
 
 }

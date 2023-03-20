@@ -38,10 +38,10 @@ public class RestauranteEntity {
     @Column
     private  Long idPropietario;//
 
-    @OneToMany(mappedBy = "restaurant")
-    private List<PedidoEntity> pedido;
-
-    @OneToMany(mappedBy = "restaurant")//la variable q esta dentro es la que se creo en la entidad usuario
-    private List<PlatoEntity> platos;
+//    @OneToMany(mappedBy = "restaurant")
+//    private List<PedidoEntity> pedido;
+//
+//    @OneToMany(mappedBy = "restaurant")//la variable q esta dentro es la que se creo en la entidad usuario
+//    private List<PlatoEntity> platos;
     //idpropietario
 }

@@ -22,7 +22,7 @@ public class UserResponseDto {
 
     private String dni;
 
-    public UserResponseDto(Long id) {
-        this.id = id;
-    }
+//    public UserResponseDto(Long id) {
+//        this.id = id;
+//    }
 }

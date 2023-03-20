@@ -34,7 +34,7 @@ public class PlatoEntity {
     private String urlImagen;
 
     @Column
-    private String activo;
+    private boolean activo=true;
 
     @ManyToOne
     @JoinColumn(name = "idCategoria")
