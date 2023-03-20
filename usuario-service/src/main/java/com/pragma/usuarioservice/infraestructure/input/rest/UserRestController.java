@@ -22,7 +22,7 @@ public class UserRestController {
 //            @ApiResponse(responseCode = "201", description = "Object created", content = @Content),
 //            @ApiResponse(responseCode = "409", description = "Object already exists", content = @Content)
 //    })
-    @PostMapping("/guardar_usuario")
+    @PostMapping("/guardar")
     public ResponseEntity<UserResponseDto> saveUser(@RequestBody UserRequestDto userRequestDto) {
 //        userHandler.saveUsers(userRequestDto);
 //        return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -36,7 +36,7 @@ public class UserRestController {
 //                            array = @ArraySchema(schema = @Schema(implementation = ObjectResponseDto.class)))),
 //            @ApiResponse(responseCode = "404", description = "No data found", content = @Content)
 //    })
-    @GetMapping("/listar_usuario")
+    @GetMapping("/listar")
     public ResponseEntity<List<UserResponseDto>> getAllUsers() {
 
         return ResponseEntity.ok(userHandler.getAllUsers());
