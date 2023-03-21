@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class PlatoRestauranteRequestDto {
-    private Long idRestaurante;
+    private Long id;
 }

@@ -10,4 +10,10 @@ public interface IPlatoPersistencePort {
     PlatoModel guardarPlato(PlatoModel platoModel);
 
     List<PlatoModel> listarPlatos();
+
+    void actualizarPlato(PlatoModel platoModel);
+
+//    PlatoModel buscarPlatoId(Long idPlato);
+    PlatoModel buscarPlatoId(Long idPlato);
+
 }

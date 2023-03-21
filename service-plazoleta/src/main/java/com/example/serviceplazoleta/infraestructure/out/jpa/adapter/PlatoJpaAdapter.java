@@ -3,6 +3,8 @@ package com.example.serviceplazoleta.infraestructure.out.jpa.adapter;
 import com.example.serviceplazoleta.domain.model.PlatoModel;
 import com.example.serviceplazoleta.domain.spi.IPlatoPersistencePort;
 import com.example.serviceplazoleta.infraestructure.exception.NoDataFoundException;
+import com.example.serviceplazoleta.infraestructure.exception.PlatoValidarException;
+import com.example.serviceplazoleta.infraestructure.exceptionhandler.ControllerAdvisor;
 import com.example.serviceplazoleta.infraestructure.out.jpa.entity.PlatoEntity;
 import com.example.serviceplazoleta.infraestructure.out.jpa.mapper.IPlatoEntityMapper;
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IPlatoRepository;
@@ -17,6 +19,10 @@ public class PlatoJpaAdapter implements IPlatoPersistencePort {
     private final IPlatoEntityMapper platoEntityMapper;
     @Override
     public PlatoModel guardarPlato(PlatoModel platoModel) {
+        if (!platoModel.precioMayorCero()) {
+             new ControllerAdvisor();
+        }
+
         PlatoEntity platoEntity = platoRepository.save(platoEntityMapper.toEntity(platoModel));
         return platoEntityMapper.toPlatoModel(platoEntity);
     }
@@ -28,5 +34,17 @@ public class PlatoJpaAdapter implements IPlatoPersistencePort {
             throw new NoDataFoundException();
         }
         return platoEntityMapper.toPlatoModelList(entityList);
+    }
+
+    @Override
+    public void actualizarPlato(PlatoModel platoModel) {
+
+        platoRepository.save(platoEntityMapper.toEntity(platoModel));
+    }
+
+    @Override
+    public PlatoModel buscarPlatoId(Long idPlato) {
+        return platoEntityMapper.toPlatoModel(platoRepository.findById(idPlato)
+                .orElseThrow(NoDataFoundException::new));
     }
 }

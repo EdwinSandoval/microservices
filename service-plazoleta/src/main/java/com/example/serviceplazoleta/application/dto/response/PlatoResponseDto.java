@@ -13,13 +13,13 @@ public class PlatoResponseDto {
 
     private String descripcion;
 
-    private float precio;
+    private int precio;
 
     private String urlImagen;
 
-    private boolean activo=true;
+    private boolean activo;
 
     private CategoriaResponseDto categoria;
 
-    private RestauranteResponseDto restaurante;
+    private RestauranteResponseDto restaurant;
 }

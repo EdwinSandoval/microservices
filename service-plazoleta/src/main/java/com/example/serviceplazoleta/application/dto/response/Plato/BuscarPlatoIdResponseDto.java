@@ -1,12 +1,15 @@
-package com.example.serviceplazoleta.application.dto.request;
+package com.example.serviceplazoleta.application.dto.response.Plato;
 
 import com.example.serviceplazoleta.application.dto.response.CategoriaResponseDto;
+import com.example.serviceplazoleta.application.dto.response.RestauranteResponseDto;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PlatoRequestDto {
+public class BuscarPlatoIdResponseDto {
+
+//    private Long id;
 
     private String nombre;
 
@@ -17,10 +20,5 @@ public class PlatoRequestDto {
     private String urlImagen;
 
     private boolean activo;
-
-    private PlatoCategoriaRequestdto categoria;
-
-    private PlatoRestauranteRequestDto restaurant;
-
 
 }

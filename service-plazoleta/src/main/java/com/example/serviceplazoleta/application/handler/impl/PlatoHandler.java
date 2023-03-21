@@ -1,11 +1,14 @@
 package com.example.serviceplazoleta.application.handler.impl;
 
+import com.example.serviceplazoleta.application.dto.request.Plato.ActualizarPlatoRequest;
 import com.example.serviceplazoleta.application.dto.request.PlatoRequestDto;
+import com.example.serviceplazoleta.application.dto.response.Plato.BuscarPlatoIdResponseDto;
 import com.example.serviceplazoleta.application.dto.response.PlatoResponseDto;
 import com.example.serviceplazoleta.application.handler.IPlatoHandler;
 import com.example.serviceplazoleta.application.mapper.IPlatoRequestMapper;
 import com.example.serviceplazoleta.application.mapper.IPlatoResponseMapper;
 import com.example.serviceplazoleta.domain.api.IPlatoServicePort;
+import com.example.serviceplazoleta.domain.model.CategoriaModel;
 import com.example.serviceplazoleta.domain.model.PlatoModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,5 +34,34 @@ public class PlatoHandler  implements IPlatoHandler {
     @Override
     public List<PlatoResponseDto> listarPlatos() {
         return platoResponseMapper.toResponseList(platoServicePort.listarPlatos());
+    }
+
+    @Override
+    public void actualizarPlato(ActualizarPlatoRequest actualizarPlatoRequest) {
+        PlatoModel platoAntiguo=platoServicePort.buscarPlatoId(actualizarPlatoRequest.getId());
+       if (platoAntiguo!=null){
+           PlatoModel platoModel=new PlatoModel();
+
+           platoModel.setId(platoAntiguo.getId());
+           platoModel.setNombre(platoAntiguo.getNombre());
+           platoModel.setPrecio(actualizarPlatoRequest.getPrecio());
+           platoModel.setDescripcion(actualizarPlatoRequest.getDescripcion());
+           platoModel.setUrlImagen(platoAntiguo.getUrlImagen());
+           platoModel.setActivo(platoAntiguo.isActivo());
+           platoModel.setCategoria(platoAntiguo.getCategoria());
+           platoModel.setRestaurant(platoAntiguo.getRestaurant());
+
+
+
+           platoServicePort.actualizarPlato(platoModel);
+       }
+
+
+    }
+
+    @Override
+    public BuscarPlatoIdResponseDto buscarPlatoId(Long idPlato) {
+        PlatoModel platoModel=platoServicePort.buscarPlatoId(idPlato);
+        return platoResponseMapper.toResponseId(platoModel);
     }
 }

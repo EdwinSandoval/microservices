@@ -17,13 +17,22 @@ public class PlatoModel {
 
     private String descripcion;
 
-    private float precio;
+    private int precio;
 
     private String urlImagen;
 
     private boolean activo;
 
-    private CategoriaModel idCategoria;
+    private CategoriaModel categoria;
 
-    private RestauranteModel idRestaurante;
+    private RestauranteModel restaurant;
+
+
+    public boolean precioMayorCero(){
+        if (this.precio>0){
+            return true;
+        }
+        return false;
+    }
+//    boolean precioMayorCero= (this.precio>0)? true:false;
 }

@@ -9,4 +9,10 @@ public interface IPlatoServicePort {
     void guardarPlato(PlatoModel platoModel);
 
     List<PlatoModel> listarPlatos();
+
+    void actualizarPlato(PlatoModel platoModel);
+
+//    PlatoModel buscarPlatoId(Long idPlato);
+    PlatoModel buscarPlatoId(Long idPlato);
 }
+
