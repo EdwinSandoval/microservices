@@ -22,5 +22,5 @@ public class UserResponseDto {
 
     private String dni;
 
-    private RolResponseDto rol;//
+//    private RolResponseDto rol;//
 }

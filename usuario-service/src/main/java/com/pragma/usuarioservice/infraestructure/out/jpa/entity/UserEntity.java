@@ -32,7 +32,7 @@ public class UserEntity {
     private String apellido;
 
 
-    @Size(max = 13, message = "El maximo 13 numeros")
+    @Size(max = 13, message = "El maximo es 13 numeros")
     @Column
     @NotNull(message = "Debes especificar el telefono")
     private String celular;
