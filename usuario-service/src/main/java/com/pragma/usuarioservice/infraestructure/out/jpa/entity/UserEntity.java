@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -24,30 +25,30 @@ public class UserEntity {
     private Long id;
 
     @Column
-    @NotNull(message = "Debes especificar el nombre")
+    @NotBlank(message = "Debes especificar el nombre")
     private  String nombre;
 
     @Column
-    @NotNull(message = "Debes especificar el apellido")
+    @NotBlank(message = "Debes especificar el apellido")
     private String apellido;
 
 
     @Size(max = 13, message = "El maximo es 13 numeros")
     @Column
-    @NotNull(message = "Debes especificar el telefono")
+    @NotBlank(message = "Debes especificar el telefono")
     private String celular;
 
     @Column
-    @NotNull(message = "Debes especificar el correo")
+    @NotBlank(message = "Debes especificar el correo")
     private String correo;
 
     @Column
-    @NotNull(message = "Debes especificar la clave")
+    @NotBlank(message = "Debes especificar la clave")
     private String clave;
 
     @Size(max = 8,min = 8, message = "El maximo 8 numeros")
     @Column
-    @NotNull(message = "Debes especificar el dni")
+    @NotBlank(message = "Debes especificar el dni")
     private String dni;//por preguntar
 
     @ManyToOne

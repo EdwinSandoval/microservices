@@ -3,11 +3,17 @@ package com.pragma.usuarioservice.infraestructure.input.rest;
 import com.pragma.usuarioservice.application.dto.request.UserRequestDto;
 import com.pragma.usuarioservice.application.dto.response.UserResponseDto;
 import com.pragma.usuarioservice.application.handler.IUserHandler;
+import com.pragma.usuarioservice.infraestructure.exception.ResponseJson.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,10 +29,12 @@ public class UserRestController {
 //            @ApiResponse(responseCode = "409", description = "Object already exists", content = @Content)
 //    })
     @PostMapping("/guardar")
-    public ResponseEntity<UserResponseDto> saveUser(@RequestBody UserRequestDto userRequestDto) {
-//        userHandler.saveUsers(userRequestDto);
-//        return ResponseEntity.status(HttpStatus.CREATED).build();
-        return new ResponseEntity<>(userHandler.saveUsers(userRequestDto),HttpStatus.CREATED);
+    public ResponseEntity<Void> saveUser(@RequestBody UserRequestDto userRequestDto,Errors errors) {
+        if (errors.hasErrors()){
+            throwError(errors);
+        }
+        userHandler.saveUsers(userRequestDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 //    @Operation(summary = "Get all objects")
@@ -47,5 +55,16 @@ public class UserRestController {
         return ResponseEntity.ok(userHandler.getUserId(userId));
     }
 
+    public void throwError(Errors errors){
+        String mensaje="";
+        int index=0;
+        for (ObjectError r:errors.getAllErrors()){
+            if (index>0){
+                mensaje+=" | ";
+            }
+            mensaje+=String.format("Parametro: %s - Mensaje: %s",r.getObjectName(),r.getDefaultMessage());
+        }
+        throw new CustomException(mensaje);
+    }
 
 }

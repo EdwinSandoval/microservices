@@ -24,7 +24,7 @@ public class UserJpaAdapter implements IUsuarioPersistencePort {
 //        if (userRepository.findById(usuarioModel.getId()).isPresent()){
 //            throw new UserAlreadyExistsException("Ya existe el usuario");
 //        }
-        if (usuarioModel.validarEmail() && usuarioModel.numeroValido() && usuarioModel.dniValidate()){
+        if (usuarioModel.validarEmail() && usuarioModel.numeroTelefonoValido() && usuarioModel.dniValidate()){
             UserEntity userEntity = userRepository.save(userEntityMapper.toEntity(usuarioModel));
             return userEntityMapper.toUserModel(userEntity);
         }
@@ -46,8 +46,5 @@ public class UserJpaAdapter implements IUsuarioPersistencePort {
         return userEntityMapper.toUserModel(userRepository.findById(idUser)
                 .orElseThrow(NoDataFoundException::new));
     }
-
-
-
 
 }

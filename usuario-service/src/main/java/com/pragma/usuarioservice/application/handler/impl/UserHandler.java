@@ -6,6 +6,7 @@ import com.pragma.usuarioservice.application.handler.IUserHandler;
 import com.pragma.usuarioservice.application.mapper.IUserRequestMapper;
 import com.pragma.usuarioservice.application.mapper.IUserResponseMapper;
 import com.pragma.usuarioservice.domain.api.IUsuarioServicePort;
+import com.pragma.usuarioservice.domain.model.RolModel;
 import com.pragma.usuarioservice.domain.model.UsuarioModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,23 +34,11 @@ public class UserHandler implements IUserHandler {
         return userResponseMapper.toResponse(usuarioModel);
     }
 
-
-//    @Override
-//    public RestauranteModel saveRestaurante(Long id, RestauranteModel restauranteModel) {
-//        return null;
-//    }
-
     @Override
     public UserResponseDto saveUsers(UserRequestDto userRequestDto) {
         UsuarioModel usuarioModel = userRequestMapper.toUser(userRequestDto);
+        usuarioModel.setRol(new RolModel(1L,"propietario","Crear platos"));
         return userResponseMapper.toResponse(usuarioServicePort.saveUsers(usuarioModel));
     }
-//
-//    @Override
-//    public List<UserResponseDto> getAllUsers() {
-//        return userResponseMapper.toResponseList(usuarioServicePort.getAllUsers());
-//    }
-
-
 
 }
