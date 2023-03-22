@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IPlatoServicePort {
 
-    void guardarPlato(PlatoModel platoModel);
+    PlatoModel guardarPlato(PlatoModel platoModel);
 
     List<PlatoModel> listarPlatos();
 

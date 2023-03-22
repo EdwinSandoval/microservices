@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserResponseDto {
+
     private Long id;
 
     private String nombre;
@@ -21,6 +22,9 @@ public class UserResponseDto {
     private String clave;
 
     private String dni;
+
+    private RolResponseDto rol;
+
 
 //    public UserResponseDto(Long id) {
 //        this.id = id;

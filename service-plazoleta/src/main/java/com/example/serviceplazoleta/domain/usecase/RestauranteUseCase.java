@@ -15,18 +15,19 @@ public class RestauranteUseCase implements IRestauranteServicePort {
         this.restaurantePersistencePort = restaurantePersistencePort;
     }
 
-//    @Override
-//    public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
-//         return restaurantePersistencePort.guardarRestaurante(restauranteModel);
-//    }
+    @Override
+    public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
+         return restaurantePersistencePort.guardarRestaurante(restauranteModel);
+    }
 
     @Override
     public List<RestauranteModel> listarRestaurantes() {
         return restaurantePersistencePort.listarRestaurantes();
     }
 
-//    @Override
-//    public RestauranteResponseDto ObtenerRestauranteId(Long idRest) {
-//        return restaurantePersistencePort.ObtenerRestauranteId(idRest);
-//    }
+    @Override
+    public RestauranteModel obtenerRestauranteId(Long idRest) {
+        return restaurantePersistencePort.obtenerRestauranteId(idRest);
+//        return platoPersistencePort.buscarPlatoId(idPlato);
+    }
 }

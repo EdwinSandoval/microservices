@@ -15,8 +15,8 @@ public class PlatoUseCase implements IPlatoServicePort {
     }
 
     @Override
-    public void guardarPlato(PlatoModel platoModel) {
-        platoPersistencePort.guardarPlato(platoModel);
+    public PlatoModel guardarPlato(PlatoModel platoModel) {
+        return  platoPersistencePort.guardarPlato(platoModel);
     }
 
     @Override

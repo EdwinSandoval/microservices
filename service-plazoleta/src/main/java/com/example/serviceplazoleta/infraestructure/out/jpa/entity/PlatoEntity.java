@@ -46,7 +46,7 @@ public class PlatoEntity {
     private Boolean activo;
 
     @ManyToOne
-    @NotNull(message = "Debes especificar la categoria")
+//    @NotNull(message = "Debes especificar la categoria")
     @JoinColumn(name = "idCategoria")
     private CategoriaEntity categoria;
 

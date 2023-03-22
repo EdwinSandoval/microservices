@@ -12,6 +12,8 @@ import com.example.serviceplazoleta.domain.usecase.CategoriaUseCase;
 import com.example.serviceplazoleta.domain.usecase.PedidoUseCase;
 import com.example.serviceplazoleta.domain.usecase.PlatoUseCase;
 import com.example.serviceplazoleta.domain.usecase.RestauranteUseCase;
+import com.example.serviceplazoleta.infraestructure.client.IUserFeign;
+import com.example.serviceplazoleta.infraestructure.input.rest.RestauranteRestController;
 import com.example.serviceplazoleta.infraestructure.out.jpa.adapter.CategoriaJpaAdapter;
 import com.example.serviceplazoleta.infraestructure.out.jpa.adapter.PedidoJpaAdapter;
 import com.example.serviceplazoleta.infraestructure.out.jpa.adapter.PlatoJpaAdapter;
@@ -67,10 +69,12 @@ public class BeanConfiguration {
 
     private final IPlatoRepository platoRepository;
     private final IPlatoEntityMapper platoEntityMapper;
+    private final IUserFeign iUserFeign;
+//    private final RestauranteRestController restauranteRestController;
     @Bean
     public IPlatoPersistencePort platoPersistencePort() {
 
-        return new PlatoJpaAdapter(platoRepository, platoEntityMapper);
+        return new PlatoJpaAdapter(platoRepository, platoEntityMapper,iUserFeign);
     }
 
     @Bean
@@ -83,12 +87,11 @@ public class BeanConfiguration {
 
     private final IRestauranteRepository restauranteRepository;
     private final IRestauranteEntityMapper restauranteEntityMapper;
-//    private final RestTemplate restTemplate;
-//    private final IUserRestaurante iUserRestaurante;
+
     @Bean
     public IRestaurantePersistencePort restaurantePersistencePort() {
 
-        return new RestauranteJpaAdapter(restauranteRepository, restauranteEntityMapper);
+        return new RestauranteJpaAdapter(restauranteRepository, restauranteEntityMapper,iUserFeign);
     }
 
     @Bean

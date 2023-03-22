@@ -1,6 +1,9 @@
 package com.example.serviceplazoleta.application.mapper;
 
+import com.example.serviceplazoleta.application.dto.response.Plato.BuscarPlatoIdResponseDto;
+import com.example.serviceplazoleta.application.dto.response.Restaurante.ObtenerRestauranteIdResponseDto;
 import com.example.serviceplazoleta.application.dto.response.RestauranteResponseDto;
+import com.example.serviceplazoleta.domain.model.PlatoModel;
 import com.example.serviceplazoleta.domain.model.RestauranteModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -14,4 +17,9 @@ public interface IRestauranteResponseMapper {
     RestauranteResponseDto toResponse(RestauranteModel restauranteModel);
 
     List<RestauranteResponseDto> toResponseList(List<RestauranteModel> restauranteModelList);
+
+    ObtenerRestauranteIdResponseDto toResponseId(RestauranteModel restauranteModel);
+
+
+//    ObtenerRestauranteIdResponseDto toResponseId(RestauranteModel restauranteModel);
 }

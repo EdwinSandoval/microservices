@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -14,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor//constructor lleno
 @Getter
 @Setter
+
 public class RestauranteEntity {
 
     @Id
@@ -22,21 +27,28 @@ public class RestauranteEntity {
     private Long id;
 
     @Column
+    @NotBlank(message = "Debes especificar el nombre")
     private String nombre;
 
     @Column
+    @NotBlank(message = "Debes especificar la direccion")
     private String direccion;
 
     @Column
+    @Size(max = 13, message = "El maximo es 13 numeros")
     private String telefono;
 
     @Column
+    @NotBlank(message = "Debes especificar su la url de logo")
     private String urlLogo;
 
     @Column
+    @NotBlank(message = "Debes especificar su nit")
+    @Size(max = 11,message = "El maximo de nuemeros es 11")
     private String nit;
 
     @Column
+    @NotNull(message = "Debes especificar el id de Propietario")
     private  Long idPropietario;//
 
     @OneToMany(mappedBy = "restaurant")

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IPlatoHandler {
 
-    void guardarPlato(PlatoRequestDto platoRequestDto);
+    PlatoResponseDto guardarPlato(PlatoRequestDto platoRequestDto);
 
     List<PlatoResponseDto> listarPlatos();
 

@@ -1,8 +1,11 @@
 package com.example.serviceplazoleta.infraestructure.out.jpa.adapter;
 
+import com.example.serviceplazoleta.application.dto.response.User.UserResponseDto;
 import com.example.serviceplazoleta.domain.model.RestauranteModel;
 import com.example.serviceplazoleta.domain.spi.IRestaurantePersistencePort;
+import com.example.serviceplazoleta.infraestructure.client.IUserFeign;
 import com.example.serviceplazoleta.infraestructure.exception.NoDataFoundException;
+import com.example.serviceplazoleta.infraestructure.exception.NotRolException;
 import com.example.serviceplazoleta.infraestructure.out.jpa.entity.RestauranteEntity;
 import com.example.serviceplazoleta.infraestructure.out.jpa.mapper.IRestauranteEntityMapper;
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IRestauranteRepository;
@@ -17,15 +20,24 @@ public class RestauranteJpaAdapter implements IRestaurantePersistencePort {
     private final IRestauranteRepository restauranteRepository;
     private final IRestauranteEntityMapper restauranteEntityMapper;
 
-//    private final IUserRestaurante iUserRestaurante;
+    private final IUserFeign iUserFeign;
 //    private final RestTemplate restTemplate;
 
-    //    @Override
-//    public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
-//        RestauranteEntity restauranteEntity = restauranteRepository
-//                .save(restauranteEntityMapper.toEntity(restauranteModel));
-//        return restauranteEntityMapper.toRestauranteModel(restauranteEntity);
-//    }
+    @Override
+    public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
+            UserResponseDto userResponseDto;
+            try {
+                userResponseDto=iUserFeign.obtenerId(restauranteModel.getIdPropietario());
+            }catch(Exception exception) {
+                throw new RuntimeException();
+            }
+            if (!userResponseDto.getRol().getNombre().equals("administrador")){
+                throw new NotRolException("No cuenta con rol admin");
+            }
+        RestauranteEntity restauranteEntity = restauranteRepository
+                .save(restauranteEntityMapper.toEntity(restauranteModel));
+        return restauranteEntityMapper.toRestauranteModel(restauranteEntity);
+    }
 
     ////////////////////////////////////////
 //    @Override
@@ -56,21 +68,11 @@ public class RestauranteJpaAdapter implements IRestaurantePersistencePort {
         return restauranteEntityMapper.toRestauranteModelList(entityList);
     }
 
-//    @Override
-//    public RestauranteResponseDto ObtenerRestauranteId(Long idRest) {
-//        RestauranteResponseDto restauranteResponseDto= new RestauranteResponseDto();
-//        RestauranteEntity restaurante=new RestauranteEntity();
-//        restaurante=restauranteRepository.findById(idRest).get();
-//        ResponseEntity<UserResponseDto> responseEntity=restTemplate.getForEntity(
-//                "http://localhost:8081/api/v1/user/listar/"+restaurante.getIdPropietario(),
-//                UserResponseDto.class);
-//
-//        UserResponseDto userResponseDto=responseEntity.getBody();
-//        restauranteResponseDto.setRestauranteModel(restauranteEntityMapper.toRestauranteModel(restaurante));
-//        restauranteResponseDto.setUserResponseDto(userResponseDto);
-//
-//        return restauranteResponseDto;
-//    }
+    @Override
+    public RestauranteModel obtenerRestauranteId(Long idRest) {
+        return restauranteEntityMapper.toRestauranteModel(restauranteRepository.findById(idRest)
+                .orElseThrow(NoDataFoundException::new));
+    }
 
 
 }

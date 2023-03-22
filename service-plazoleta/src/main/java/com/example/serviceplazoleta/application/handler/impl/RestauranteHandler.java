@@ -1,6 +1,7 @@
 package com.example.serviceplazoleta.application.handler.impl;
 
 import com.example.serviceplazoleta.application.dto.request.RestauranteRequestDto;
+import com.example.serviceplazoleta.application.dto.response.Restaurante.ObtenerRestauranteIdResponseDto;
 import com.example.serviceplazoleta.application.dto.response.RestauranteResponseDto;
 import com.example.serviceplazoleta.application.handler.IRestauranteHandler;
 import com.example.serviceplazoleta.application.mapper.IRestauranteRequestMapper;
@@ -24,22 +25,23 @@ public class RestauranteHandler  implements IRestauranteHandler {
     private final IRestauranteResponseMapper restauranteResponseMapper;
 
 //    private final RestTemplate restTemplate;
-//    @Override
-//    public RestauranteResponseDto guardarRestaurante(RestauranteRequestDto restauranteRequestDto) {
-//        RestauranteModel restauranteModel = restauranteRequestMapper.toRestaurante(restauranteRequestDto);
-//        return restauranteResponseMapper.toResponse(restauranteServicePort.guardarRestaurante(restauranteModel));
-//    }
+    @Override
+    public RestauranteResponseDto guardarRestaurante(RestauranteRequestDto restauranteRequestDto) {
+        RestauranteModel restauranteModel = restauranteRequestMapper.toRestaurante(restauranteRequestDto);
+        return restauranteResponseMapper.toResponse(restauranteServicePort.guardarRestaurante(restauranteModel));
+    }
 
     @Override
     public List<RestauranteResponseDto> listarRestaurantes() {
         return restauranteResponseMapper.toResponseList(restauranteServicePort.listarRestaurantes());
     }
 
-//    @Override
-//    public RestauranteResponseDto ObtenerRestauranteId(Long idRest) {
-//        RestauranteResponseDto restauranteResponseDto=restauranteServicePort.ObtenerRestauranteId(idRest);
-//        return restauranteResponseDto;
-//    }
+    @Override
+    public ObtenerRestauranteIdResponseDto obtenerRestauranteId(Long idRest) {
+        RestauranteModel restauranteModel=restauranteServicePort.obtenerRestauranteId(idRest);
+        return restauranteResponseMapper.toResponseId(restauranteModel);
+//        platoResponseMapper.toResponseId(platoModel)
+    }
 
 
 

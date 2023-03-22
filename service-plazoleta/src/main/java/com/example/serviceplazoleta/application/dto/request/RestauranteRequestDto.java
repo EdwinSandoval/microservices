@@ -18,5 +18,5 @@ public class RestauranteRequestDto {
 
     private String nit;
 
-    private UserRestauranteRequestDto propietarioId;
+    private Long idPropietario;
 }

@@ -26,9 +26,10 @@ public class PlatoHandler  implements IPlatoHandler {
     private final IPlatoResponseMapper platoResponseMapper;
 
     @Override
-    public void guardarPlato(PlatoRequestDto platoRequestDto) {
+    public PlatoResponseDto guardarPlato(PlatoRequestDto platoRequestDto) {
         PlatoModel platoModel = platoRequestMapper.toPlato(platoRequestDto);
-        platoServicePort.guardarPlato(platoModel);
+//        platoServicePort.guardarPlato(platoModel);
+        return platoResponseMapper.toResponse(platoServicePort.guardarPlato(platoModel));
     }
 
     @Override
