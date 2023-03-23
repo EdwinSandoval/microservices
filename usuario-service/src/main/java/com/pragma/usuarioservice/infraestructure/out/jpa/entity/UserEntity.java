@@ -24,37 +24,28 @@ public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column( nullable = false)
     private Long id;
 
-    @Column
-    @NotBlank(message = "Debes especificar el nombre")
+    @Column( nullable = false, length = 30)
     private  String nombre;
 
-    @Column
-    @NotBlank(message = "Debes especificar el apellido")
+    @Column( nullable = false, length = 20)
     private String apellido;
 
-
-    @Size(max = 13, message = "El maximo es 13 numeros")
-    @Column
-//    @NotBlank(message = "Debes especificar el telefono")
+    @Column( nullable = false, length = 13)
     private String celular;
-
-    @Column
-    @NotBlank(message = "Debes especificar el email")
+    @Column( nullable = false)
     private String email;
-
-    @Column
-    @NotBlank(message = "Debes especificar la password")
+    @Column(nullable = false)
     private String password;
 
-    @Size(max = 8,min = 8, message = "El maximo 8 numeros")
-    @Column
-//    @NotBlank(message = "Debes especificar el dni")
+
+    @Column(nullable = false,length = 8)
     private String dni;//por preguntar
 
     @ManyToOne
-    @JoinColumn(name = "idRol")//es el id que tiene la entidad rol
+    @JoinColumn(name = "idRol",nullable = false)//es el id que tiene la entidad rol
     private RolEntity rol;
 
 

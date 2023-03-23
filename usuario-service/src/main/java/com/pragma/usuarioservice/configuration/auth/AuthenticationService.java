@@ -24,38 +24,35 @@ public class AuthenticationService {
     private final JwtService jwtService;
 
     private final AuthenticationManager authenticationManager;
-    public AuthenticationResponse register(RegisterRequest request) {
-
-        var user= UserEntity.builder()
-                .nombre(request.getNombre())
-                .apellido(request.getApellido())
-//                .celular(request.get)
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-//                .rol(RolEntity())
-                .build();
-
-//                .dni()
-//                .rol()
-//        repository.findById(user.getId());
-        var user2 =repository.findByEmail(request.getEmail());
-        if (user2.isPresent()){
-            var jwtToken = jwtService.generateToken(user);
-
-            return AuthenticationResponse.builder()
-                    .token(jwtToken)
-                    .build();
-//            throw new UserAlreadyExistsException("Usuario Existe");
-        }
-        else {
-            repository.save(user);
-            var jwtToken = jwtService.generateToken(user);
-
-            return AuthenticationResponse.builder()
-                    .token(jwtToken)
-                    .build();
-        }
-    }
+//    public AuthenticationResponse register(RegisterRequest request) {
+//
+//        var user= UserEntity.builder()
+////                .nombre(request.getNombre())
+////                .apellido(request.getApellido())
+////                .celular(request.get)
+//                .email(request.getEmail())
+//                .password(passwordEncoder.encode(request.getPassword()))
+////                .rol(RolEntity())
+//                .build();
+//
+//        var email =repository.findByEmail(request.getEmail());
+//        if (email.isPresent()  ){
+//            var jwtToken = jwtService.generateToken(user);
+//
+//            return AuthenticationResponse.builder()
+//                    .token(jwtToken)
+//                    .build();
+////            throw new UserAlreadyExistsException("Usuario Existe");
+//        }
+//        else {
+//            repository.save(user);
+//            var jwtToken = jwtService.generateToken(user);
+//
+//            return AuthenticationResponse.builder()
+//                    .token(jwtToken)
+//                    .build();
+//        }
+//    }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 

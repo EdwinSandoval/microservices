@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+//import io.swagger.v3.oas.annotations.Operation;
 
 import java.util.List;
 
@@ -28,13 +30,31 @@ public class UserRestController {
 //            @ApiResponse(responseCode = "201", description = "Object created", content = @Content),
 //            @ApiResponse(responseCode = "409", description = "Object already exists", content = @Content)
 //    })
-    @PostMapping("/guardar")
-    public ResponseEntity<Void> saveUser(@RequestBody UserRequestDto userRequestDto,Errors errors) {
+    @PostMapping("/guardarPropietario")
+    public ResponseEntity<Void> saveUserPropietary(@Validated @RequestBody UserRequestDto userRequestDto, Errors errors) {
         if (errors.hasErrors()){
             throwError(errors);
         }
-        userHandler.saveUsers(userRequestDto);
+        userHandler.saveUsers(userRequestDto,2L);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/guardarEmpleado/{idRol}")
+    public ResponseEntity<Void> saveUserEmployee(@Validated @RequestBody UserRequestDto userRequestDto,@PathVariable Long idRol, Errors errors) {
+        if (idRol.equals(3)){
+            userHandler.saveUsers(userRequestDto,3L);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @PostMapping("/guardarCliente/{idRol}")
+    public ResponseEntity<Void> saveUserClient(@Validated @RequestBody UserRequestDto userRequestDto,@PathVariable Long idRol, Errors errors) {
+        if (idRol.equals(4)){
+            userHandler.saveUsers(userRequestDto,4L);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
 //    @Operation(summary = "Get all objects")

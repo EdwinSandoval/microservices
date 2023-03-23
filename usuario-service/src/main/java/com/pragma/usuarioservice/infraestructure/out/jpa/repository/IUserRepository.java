@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public interface IUserRepository extends JpaRepository<UserEntity,Long> {
     //estos metodos son para buscar por otro atributo que no sea el id
-
     Optional<UserEntity> findByEmail(String email);
 //
 //    void deleteById(Long idUser);

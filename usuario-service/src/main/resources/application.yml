@@ -16,12 +16,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-eureka:
+#eureka:
 #  client:
 #    fetch-registry: false
 #    register-with-eureka: false
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#  instance:
+#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 ---
 spring:

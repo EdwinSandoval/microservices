@@ -20,10 +20,10 @@ public class RolEntity {
     @Column(name = "idRol")
     private Long id;
 
-    @Column()
+    @Column(nullable = false, length = 20)
     private String nombre="USER";
 
-    @Column
+    @Column(nullable = false)
     private String descripcion;
 
     @OneToMany(mappedBy = "rol")//la variable q esta dentro es la que se creo en la entidad usuario

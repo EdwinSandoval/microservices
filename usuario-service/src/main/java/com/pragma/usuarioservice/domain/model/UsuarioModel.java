@@ -10,30 +10,27 @@ import java.util.regex.Pattern;
 //@Setter
 //@AllArgsConstructor
 //@NoArgsConstructor
-
+@Builder
 public class UsuarioModel {
 
     private Long id;
     private String nombre;
     private String apellido;
     private String celular;
-    private String correo;
-    private String clave;
+    private String email;
+    private String password;
     private String dni;
     private RolModel rol;
 
-    public UsuarioModel(Long id, String nombre, String apellido, String celular, String correo, String clave, String dni, RolModel rol) {
+    public UsuarioModel(Long id, String nombre, String apellido, String celular, String email, String password, String dni, RolModel rol) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.celular = celular;
-        this.correo = correo;
-        this.clave = clave;
+        this.email = email;
+        this.password = password;
         this.dni = dni;
         this.rol = rol;
-    }
-
-    public UsuarioModel() {
     }
 
     public Long getId() {
@@ -68,20 +65,20 @@ public class UsuarioModel {
         this.celular = celular;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getClave() {
-        return clave;
+    public String getPassword() {
+        return password;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getDni() {
@@ -100,6 +97,9 @@ public class UsuarioModel {
         this.rol = rol;
     }
 
+    public UsuarioModel() {
+    }
+
     public boolean validarEmail(){
         // Patrón para validar el email
         Pattern pattern = Pattern
@@ -108,7 +108,7 @@ public class UsuarioModel {
 
         // El email a validar
 //        String email = "info@programacionextrema.com";
-        String email = this.correo;
+        String email = this.email;
         Matcher mather = pattern.matcher(email);
 
         if (mather.find() == true) {

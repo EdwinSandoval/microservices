@@ -2,6 +2,7 @@ package com.pragma.usuarioservice.infraestructure.input.rest;
 
 import com.pragma.usuarioservice.application.dto.response.UserResponseDto;
 import com.pragma.usuarioservice.application.handler.IUserHandler;
+import com.pragma.usuarioservice.infraestructure.out.jpa.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DemoController {
     private final IUserHandler userHandler;
-
+    private final IUserRepository repository;
     @GetMapping("/listar")
     public ResponseEntity<List<UserResponseDto>> getAllUsers() {
 

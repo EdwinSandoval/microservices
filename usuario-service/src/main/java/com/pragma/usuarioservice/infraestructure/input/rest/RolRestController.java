@@ -17,16 +17,16 @@ public class RolRestController {
 
     private final IRolHandler rolHandler;
 
-    @PostMapping("/")
+    @PostMapping("/guardar")
     public ResponseEntity<Void> saveRol(@RequestBody RolRequestDto rolRequestDto) {
         rolHandler.saveRols(rolRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("/listar")
     public ResponseEntity<List<RolResponseDto>> getAllRols() {
-        String palabra="+985645";
-        System.out.println(palabra.substring(0,1)+" tamaño="+palabra.length()+" sub 0 a tamaño="+palabra.substring(0,palabra.length()));
+//        String palabra="+985645";
+//        System.out.println(palabra.substring(0,1)+" tamaño="+palabra.length()+" sub 0 a tamaño="+palabra.substring(0,palabra.length()));
         return ResponseEntity.ok(rolHandler.getAllRols());
     }
 }

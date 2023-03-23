@@ -7,7 +7,6 @@ import com.pragma.usuarioservice.infraestructure.out.jpa.entity.RolEntity;
 import com.pragma.usuarioservice.infraestructure.out.jpa.mapper.IRolEntityMapper;
 import com.pragma.usuarioservice.infraestructure.out.jpa.repository.IRolRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -19,9 +18,14 @@ public class RolJpaAdapter implements IRolPersistencePort {
 
 
     @Override
-    public RolModel saveRols(RolModel rolModel) {
+    public void saveRols(RolModel rolModel) {
         RolEntity rolEntity = rolRepository.save(rolEntityMapper.toEntity(rolModel));
-        return rolEntityMapper.toRolModel(rolEntity);
+        rolEntityMapper.toRolModel(rolEntity);
+    }
+
+    @Override
+    public RolModel getRoleById(Long id) {
+        return rolEntityMapper.toRolModel(rolRepository.findById(id).get());
     }
 
     @Override

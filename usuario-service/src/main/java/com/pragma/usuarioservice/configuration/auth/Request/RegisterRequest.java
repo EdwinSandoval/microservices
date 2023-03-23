@@ -1,5 +1,6 @@
 package com.pragma.usuarioservice.configuration.auth.Request;
 
+import com.pragma.usuarioservice.application.dto.request.UserRolRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,9 +16,14 @@ public class RegisterRequest {
 
     private String apellido;
 
+    private String celular;
+
     private String email;
 
     private String password;
 
+    private String dni;
+
+    private UserRolRequestDto rol;
 
 }

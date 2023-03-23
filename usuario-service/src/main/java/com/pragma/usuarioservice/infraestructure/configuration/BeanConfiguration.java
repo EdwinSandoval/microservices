@@ -40,7 +40,7 @@ public class BeanConfiguration {
 
     @Bean
     public IUsuarioServicePort usuarioServicePort() {
-        return new UsersUseCase(userPersistencePort(),encryptPassword());
+        return new UsersUseCase(userPersistencePort(), rolPersistencePort(), encryptPassword());
     }
 
     @Bean
