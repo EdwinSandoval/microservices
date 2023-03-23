@@ -44,7 +44,13 @@ public class UserJpaAdapter implements IUsuarioPersistencePort {
 
     @Override
     public UsuarioModel getUserId(Long idUser) {
-        return userEntityMapper.toUserModel(userRepository.findById(idUser).get());
+        try {
+
+            return userEntityMapper.toUserModel(userRepository.findById(idUser).get());
+        }catch (Exception e){
+            throw new RuntimeException();
+        }
+
 //                .orElseThrow(NoDataFoundException::new));
     }
 
