@@ -26,29 +26,22 @@ public class RestauranteEntity {
     @Column(name = "idRestaurante")
     private Long id;
 
-    @Column
-    @NotBlank(message = "Debes especificar el nombre")
+    @Column( nullable = false, length = 30)
     private String nombre;
 
-    @Column
-    @NotBlank(message = "Debes especificar la direccion")
+    @Column( nullable = false, length = 50)
     private String direccion;
 
-    @Column
-    @Size(max = 13, message = "El maximo es 13 numeros")
+    @Column( nullable = false, length = 13)
     private String telefono;
 
-    @Column
-    @NotBlank(message = "Debes especificar su la url de logo")
+    @Column( nullable = false, length = 100)
     private String urlLogo;
 
-    @Column
-    @NotBlank(message = "Debes especificar su nit")
-    @Size(max = 11,message = "El maximo de nuemeros es 11")
+    @Column( nullable = false, length = 11)
     private String nit;
 
-    @Column
-    @NotNull(message = "Debes especificar el id de Propietario")
+    @Column( nullable = false)
     private  Long idPropietario;//
 
     @OneToMany(mappedBy = "restaurant")
@@ -56,5 +49,5 @@ public class RestauranteEntity {
 
     @OneToMany(mappedBy = "restaurant")//la variable q esta dentro es la que se creo en la entidad usuario
     private List<PlatoEntity> platos;
-    //idpropietario
+
 }

@@ -26,13 +26,11 @@ public class RestauranteJpaAdapter implements IRestaurantePersistencePort {
     @Override
     public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
             UserResponseDto userResponseDto;
-            try {
+
                 userResponseDto=iUserFeign.obtenerId(restauranteModel.getIdPropietario());
-            }catch(Exception exception) {
-                throw new RuntimeException();
-            }
-            if (!userResponseDto.getRol().getNombre().equals("administrador")){
-                throw new NotRolException("No cuenta con rol admin");
+
+            if (!userResponseDto.getRol().getNombre().equals("propietario")){
+                throw new NotRolException("No existe propietario");
             }
         RestauranteEntity restauranteEntity = restauranteRepository
                 .save(restauranteEntityMapper.toEntity(restauranteModel));

@@ -95,4 +95,14 @@ public class RestauranteModel {
     public boolean validarTelefono(){
         return this.telefono.matches("/d");
     }
+
+    public boolean numeroTelefonoValido(){
+        String numero=this.telefono;
+        if (numero.substring(0,1).equals("+") && numero.substring(1,numero.length()).matches("[0-9]*") ||
+                numero.substring(0,numero.length()).matches("[0-9]*")  ){
+//            System.out.println("holaaaaaaaaaaa "+numero.substring(0,numero.length())+" val "+numero.substring(0,1).equals("+"));
+            return true;
+        }
+        return false;
+    }
 }

@@ -28,20 +28,20 @@ public class PlatoJpaAdapter implements IPlatoPersistencePort {
     private final IPlatoEntityMapper platoEntityMapper;
 
     private final IUserFeign iUserFeign;
-//    @Autowired
-//    private RestauranteRestController restauranteRestController;
+    @Autowired
+    private RestauranteRestController restauranteRestController;
     @Override
     public PlatoModel guardarPlato(PlatoModel platoModel) {
 //        RestauranteRestController restauranteRestController;
-//        UserResponseDto userResponseDto;
-//        ObtenerRestauranteIdResponseDto idRest=restauranteRestController.obtenerRestauranteId(platoModel.getRestaurant().getId());//obtengo el id del restaurante
-//
-//        userResponseDto=iUserFeign.obtenerId(idRest.getIdPropietario());
-//
+        UserResponseDto userResponseDto;
+        ObtenerRestauranteIdResponseDto idRest=restauranteRestController.obtenerRestauranteId(platoModel.getRestaurant().getId());//obtengo el id del restaurante
+        System.out.println("dddddddddddddddddddd"+idRest);
+        userResponseDto=iUserFeign.obtenerId(idRest.getIdPropietario());
+        System.out.println("dddddddddddddddddddd"+userResponseDto);
 //        System.out.println("holaaaaaaaaaa222222222"+userResponseDto);
-//        if (!userResponseDto.getRol().getNombre().equals("propietario")){
-//            throw new NotRolException("No cuenta con rol propietario");
-//        }
+        if (!userResponseDto.getRol().getNombre().equals("propietario")){
+            throw new NotRolException("No cuenta con rol propietario");
+        }
 
 //        if (!platoModel.precioMayorCero()) {
 //            throw new NotRolException("Ingrese precio mayor a cero");

@@ -25,12 +25,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-eureka:
-  #  client:
-  #    fetch-registry: false
-  #    register-with-eureka: false
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#eureka:
+#  #  client:
+#  #    fetch-registry: false
+#  #    register-with-eureka: false
+#  instance:
+#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 appDescription: "Pragma usuario"
 
