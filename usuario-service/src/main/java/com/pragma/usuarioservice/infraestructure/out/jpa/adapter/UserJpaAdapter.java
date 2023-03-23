@@ -20,13 +20,14 @@ public class UserJpaAdapter implements IUsuarioPersistencePort {
     private final IUserEntityMapper userEntityMapper;
 
     @Override
-    public UsuarioModel saveUsers(UsuarioModel usuarioModel) {
+    public void saveUsers(UsuarioModel usuarioModel) {
 //        if (userRepository.findById(usuarioModel.getId()).isPresent()){
 //            throw new UserAlreadyExistsException("Ya existe el usuario");
 //        }
         if (usuarioModel.validarEmail() && usuarioModel.numeroTelefonoValido() && usuarioModel.dniValidate()){
             UserEntity userEntity = userRepository.save(userEntityMapper.toEntity(usuarioModel));
-            return userEntityMapper.toUserModel(userEntity);
+            userEntityMapper.toUserModel(userEntity);
+            return;
         }
         throw new UserNameNotValidateException("Usuario invalido");
 
@@ -43,8 +44,13 @@ public class UserJpaAdapter implements IUsuarioPersistencePort {
 
     @Override
     public UsuarioModel getUserId(Long idUser) {
-        return userEntityMapper.toUserModel(userRepository.findById(idUser)
-                .orElseThrow(NoDataFoundException::new));
+        return userEntityMapper.toUserModel(userRepository.findById(idUser).get());
+//                .orElseThrow(NoDataFoundException::new));
+    }
+
+    @Override
+    public UsuarioModel getUserByEmail(String email) {
+        return userEntityMapper.toUserModel(userRepository.findByEmail(email).get());
     }
 
 }

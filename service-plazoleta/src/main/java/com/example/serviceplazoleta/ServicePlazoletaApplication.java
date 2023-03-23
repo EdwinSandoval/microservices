@@ -14,7 +14,7 @@ public class ServicePlazoletaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServicePlazoletaApplication.class, args);
-			System.out.print("Terminado---------------*******");
+//			System.out.print("Terminado---------------*******");
 		}
 
 //	@Bean

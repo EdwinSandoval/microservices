@@ -21,12 +21,12 @@ public class UsersUseCase  implements IUsuarioServicePort {
     }
 
     @Override
-    public UsuarioModel saveUsers(UsuarioModel usuarioModel,Long idRol) {
+    public void saveUsers(UsuarioModel usuarioModel, Long idRol) {
         String encoderPassword=encryptPassword.encryptPassword(usuarioModel.getPassword());
         usuarioModel.setPassword(encoderPassword);
         usuarioModel.setRol(rolPersistencePort.getRoleById(idRol));
         usuarioModel.setId(-1L);
-        return  usuarioPersistencePort.saveUsers(usuarioModel);
+        usuarioPersistencePort.saveUsers(usuarioModel);
     }
 
     @Override
@@ -40,7 +40,10 @@ public class UsersUseCase  implements IUsuarioServicePort {
         return usuarioPersistencePort.getUserId(id);
     }
 
-
+    @Override
+    public UsuarioModel getUserByEmail(String email) {
+        return usuarioPersistencePort.getUserByEmail(email);
+    }
 
 
 //

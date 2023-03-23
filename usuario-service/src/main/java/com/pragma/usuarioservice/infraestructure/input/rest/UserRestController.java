@@ -72,7 +72,7 @@ public class UserRestController {
 
     @GetMapping("/listar/{id}")
     public ResponseEntity<UserResponseDto> getUserId(@PathVariable(name = "id") Long userId){
-        return ResponseEntity.ok(userHandler.getUserId(userId));
+        return ResponseEntity.ok(userHandler.getUserId(1L));
     }
 
     public void throwError(Errors errors){

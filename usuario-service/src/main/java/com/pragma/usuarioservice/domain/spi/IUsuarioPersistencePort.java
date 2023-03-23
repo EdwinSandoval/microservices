@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface IUsuarioPersistencePort {
 
-    UsuarioModel saveUsers(UsuarioModel usuarioModel);
+    void saveUsers(UsuarioModel usuarioModel);
 
     List<UsuarioModel> getAllUsers();
 
     UsuarioModel getUserId(Long idUser);
 
-
+    UsuarioModel getUserByEmail(String email);
 
     //void deleteUser(Long idUser);
 
