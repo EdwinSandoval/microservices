@@ -37,7 +37,7 @@ public class UserHandler implements IUserHandler {
     @Override
     public UserResponseDto saveUsers(UserRequestDto userRequestDto) {
         UsuarioModel usuarioModel = userRequestMapper.toUser(userRequestDto);
-        usuarioModel.setRol(new RolModel(1L,"propietario","Crear platos"));
+//        usuarioModel.setRol(new RolModel(1L,"propietario","Crear platos"));
         return userResponseMapper.toResponse(usuarioServicePort.saveUsers(usuarioModel));
     }
 

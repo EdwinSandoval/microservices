@@ -3,17 +3,17 @@ package com.pragma.usuarioservice.infraestructure.input.rest;
 import com.pragma.usuarioservice.application.dto.request.UserRequestDto;
 import com.pragma.usuarioservice.application.dto.response.UserResponseDto;
 import com.pragma.usuarioservice.application.handler.IUserHandler;
+import com.pragma.usuarioservice.configuration.auth.Request.AuthenticationRequest;
+import com.pragma.usuarioservice.configuration.auth.Request.RegisterRequest;
+import com.pragma.usuarioservice.configuration.auth.Response.AuthenticationResponse;
 import com.pragma.usuarioservice.infraestructure.exception.ResponseJson.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -66,5 +66,6 @@ public class UserRestController {
         }
         throw new CustomException(mensaje);
     }
+
 
 }

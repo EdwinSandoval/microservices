@@ -15,7 +15,7 @@ public class UsuarioServiceApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(UsuarioServiceApplication.class, args);
-		System.out.println("hola");
+//		System.out.println("hola");
 	}
 
 }

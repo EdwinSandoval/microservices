@@ -1,10 +1,7 @@
 package com.pragma.usuarioservice.domain.model;
 
 import com.pragma.usuarioservice.infraestructure.out.jpa.entity.RolEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,6 +10,7 @@ import java.util.regex.Pattern;
 //@Setter
 //@AllArgsConstructor
 //@NoArgsConstructor
+
 public class UsuarioModel {
 
     private Long id;
