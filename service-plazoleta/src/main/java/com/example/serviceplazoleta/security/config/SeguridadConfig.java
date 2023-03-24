@@ -5,6 +5,7 @@ import com.example.serviceplazoleta.security.filter.JWTAuthenticationFilter;
 import com.example.serviceplazoleta.security.filter.JWTAuthorizationFilter;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,62 +23,62 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-//@EnableWebSecurity(debug = true)//permite q spring security funcione en nuestro proyecto
-//@EnableMethodSecurity//habilitar la autorizacion
-//@RequiredArgsConstructor
-@AllArgsConstructor
+@EnableWebSecurity(debug = true)//permite q spring security funcione en nuestro proyecto
+@EnableMethodSecurity//habilitar la autorizacion
+@RequiredArgsConstructor
 public class SeguridadConfig {
-//    private final JWTAuthorizationFilter jwtAuthorizationFilter;
-//    private final UserDetailsService userDetailsService;
-//    private final PasswordEncoder passwordEncoder;
-
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception{
-//        return http
-//                .csrf(csrf->csrf.disable())
-//                .httpBasic(httoBasic->httoBasic.disable())
-//                .cors(cors->cors.disable())
-//                .authorizeHttpRequests(auth->
-//                        auth
-//
-//                                .antMatchers("/auth/**","/api/v1/restaurante/**").permitAll()
-//                                .anyRequest()
-//                                .authenticated()
-//                )
-//                .sessionManagement(httpSecuritySessionManagementConfigurer ->
-//                        httpSecuritySessionManagementConfigurer.sessionCreationPolicy(
-//                                SessionCreationPolicy.STATELESS
-//                        )
-//                )
-//                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
-//                .build();
-//    }
-    private final UserDetailsService userDetailsService;
     private final JWTAuthorizationFilter jwtAuthorizationFilter;
+    private final UserDetailsService userDetailsService;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception{
-        JWTAuthenticationFilter jwtAuthenticationFilter=new JWTAuthenticationFilter();
-        jwtAuthenticationFilter.setAuthenticationManager(authManager);
-        jwtAuthenticationFilter.setFilterProcessesUrl("/login");
-
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception{
         return http
-            .csrf().disable()
-            .authorizeHttpRequests()
-            .anyRequest()
-            .authenticated()
-            .and()
-            .httpBasic()
-            .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-                .addFilter(jwtAuthenticationFilter)
-                .addFilterBefore(jwtAuthorizationFilter,UsernamePasswordAuthenticationFilter.class)
-            .build();
+                .csrf(csrf->csrf.disable())
+                .httpBasic(httoBasic->httoBasic.disable())
+                .cors(cors->cors.disable())
+                .authorizeHttpRequests(auth->
+                        auth
 
-
-}
+                                .antMatchers("/auth/**","/api/v1/restaurante/**").permitAll()
+                                .anyRequest()
+                                .authenticated()
+                )
+                .sessionManagement(httpSecuritySessionManagementConfigurer ->
+                        httpSecuritySessionManagementConfigurer.sessionCreationPolicy(
+                                SessionCreationPolicy.STATELESS
+                        )
+                )
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
+//    private final UserDetailsService userDetailsService;
+//    private final JWTAuthorizationFilter jwtAuthorizationFilter;
+//
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception{
+//        JWTAuthenticationFilter jwtAuthenticationFilter=new JWTAuthenticationFilter();
+//        jwtAuthenticationFilter.setAuthenticationManager(authManager);
+//        jwtAuthenticationFilter.setFilterProcessesUrl("/login");
+//
+//        return http
+//            .csrf().disable()
+//            .authorizeHttpRequests()
+//            .anyRequest()
+//            .authenticated()
+//            .and()
+//            .httpBasic()
+//            .and()
+//            .sessionManagement()
+//            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//            .and()
+//                .addFilter(jwtAuthenticationFilter)
+//                .addFilterBefore(jwtAuthorizationFilter,UsernamePasswordAuthenticationFilter.class)
+//            .build();
+//
+//
+//}
 //    @Bean
 //    UserDetailsService userDetailsService(){
 //    InMemoryUserDetailsManager manager=new InMemoryUserDetailsManager();

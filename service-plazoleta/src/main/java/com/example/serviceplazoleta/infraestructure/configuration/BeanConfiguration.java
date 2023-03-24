@@ -107,12 +107,12 @@ public class BeanConfiguration {
         return new RestauranteUseCase(restaurantePersistencePort());
     }
 
-    private final UserDetailsService userDetailsService;
+//    private final UserDetailsService userDetailsService;
 //    private final JWTAuthorizationFilter jwtAuthorizationFilter;
-    @Bean
-   public UserDetailsService userDetailsService(){
-       return new UserDetailsServiceImpl();
-   }
+//    @Bean
+//   public UserDetailsService userDetailsService(){
+//       return new UserDetailsServiceImpl();
+//   }
 
 
 //    @Bean
@@ -125,10 +125,10 @@ public class BeanConfiguration {
 //        };
 //    }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public BCryptPasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
 
 
