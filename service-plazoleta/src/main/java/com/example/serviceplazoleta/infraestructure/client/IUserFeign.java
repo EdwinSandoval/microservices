@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "usuario-service",url = "localhost:8081/api/v1/user")
 public interface IUserFeign {
     @GetMapping("/listar/{id}")
-    public UserResponseDto obtenerId(@PathVariable Long id);
+    public UserResponseDto obtenerId(@PathVariable("id") Long id);
 
     @GetMapping("/username/{email}")
-    public UserResponseDto obtenerEmail(@PathVariable String email);
+    public UserResponseDto obtenerEmail(@PathVariable("email") String email);
 
 }

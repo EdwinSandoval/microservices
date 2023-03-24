@@ -51,12 +51,12 @@ public class UserRestController {
     }
 
     @GetMapping("/listar/{id}")
-    public ResponseEntity<UserResponseDto> getUserId(@PathVariable(name = "id") Long userId){
+    public ResponseEntity<UserResponseDto> getUserId(@PathVariable("id") Long userId){
         return ResponseEntity.ok(userHandler.getUserId(userId));
     }
 
     @GetMapping("/username/{email}")
-    public ResponseEntity<UserResponseDto> getEmail(@PathVariable(name = "email") String email){
+    public ResponseEntity<UserResponseDto> getEmail(@PathVariable("email") String email){
         return ResponseEntity.ok(userHandler.getEmail(email));
     }
 

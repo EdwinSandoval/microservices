@@ -1,5 +1,8 @@
 package com.example.serviceplazoleta.infraestructure.configuration;
 
+import com.example.serviceplazoleta.application.dto.response.User.UserResponseDto;
+import com.example.serviceplazoleta.configuration.auth.Details.DetailsUser;
+import com.example.serviceplazoleta.configuration.auth.Details.IDetailsUserMapper;
 import com.example.serviceplazoleta.domain.api.ICategoriaServicePort;
 import com.example.serviceplazoleta.domain.api.IPedidoServicePort;
 import com.example.serviceplazoleta.domain.api.IPlatoServicePort;
@@ -29,6 +32,16 @@ import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IRestaura
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Optional;
 
 @Configuration
 @RequiredArgsConstructor
@@ -100,21 +113,39 @@ public class BeanConfiguration {
         return new RestauranteUseCase(restaurantePersistencePort());
     }
 
+    //-----------------------------------------
+//    private final IUserFeign iUserFeign;
+    private final IDetailsUserMapper detailsUserMapper;
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-//    private final IRestauranteRepository restauranteRepository;
-//    private final IRestauranteEntityMapper restauranteEntityMapper;
-//    //    private final RestTemplate restTemplate;
-////    private final IUserRestaurante iUserRestaurante;
-//    @Bean
-//    public IUserRestaurante irestaurantePersistencePort() {
-//
-//        return new RestauranteJpaAdapter(restauranteRepository, restauranteEntityMapper);
-//    }
-//
-//    @Bean
-//    public IRestauranteServicePort restauranteServicePort() {
-//
-//        return new RestauranteUseCase(restaurantePersistencePort());
-//    }
+    @Bean
+    public UserDetailsService userDetailsService() {
+
+        return username -> optionalDetailsUser(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+    private Optional<DetailsUser> optionalDetailsUser(String username) {
+        UserResponseDto userResponseDto = iUserFeign.obtenerEmail(username);
+        userResponseDto = iUserFeign.obtenerEmail(username);
+
+        DetailsUser user = detailsUserMapper.toUser(userResponseDto);
+        user.setRol(userResponseDto.getRol().getNombre());
+        return Optional.of(user);
+    }
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(encoder());
+        return authProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 
 }
