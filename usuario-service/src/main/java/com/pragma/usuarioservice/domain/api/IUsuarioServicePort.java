@@ -13,6 +13,8 @@ public interface IUsuarioServicePort {
 
     UsuarioModel getUserId(Long idUser);
 
+    UsuarioModel getEmail(String email);
+
 
     //void deleteUser(Long idUser);
 

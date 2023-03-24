@@ -19,8 +19,8 @@ public class UsersUseCase  implements IUsuarioServicePort {
 
     @Override
     public UsuarioModel saveUsers(UsuarioModel usuarioModel) {
-        String encoderPassword=encryptPassword.encryptPassword(usuarioModel.getClave());
-        usuarioModel.setClave(encoderPassword);
+        String encoderPassword=encryptPassword.encryptPassword(usuarioModel.getPassword());
+        usuarioModel.setPassword(encoderPassword);
         return  usuarioPersistencePort.saveUsers(usuarioModel);
     }
 
@@ -35,7 +35,10 @@ public class UsersUseCase  implements IUsuarioServicePort {
         return usuarioPersistencePort.getUserId(id);
     }
 
-
+    @Override
+    public UsuarioModel getEmail(String email) {
+        return usuarioPersistencePort.getEmail(email);
+    }
 
 
 //

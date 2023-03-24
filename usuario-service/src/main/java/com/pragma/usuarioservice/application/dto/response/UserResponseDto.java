@@ -12,8 +12,8 @@ public class UserResponseDto {
     private String nombre;
     private String apellido;
     private String celular;
-    private String correo;
-    private String clave;
+    private String email;
+    private String password;
     private String dni;
     private RolResponseDto rol;//
 }

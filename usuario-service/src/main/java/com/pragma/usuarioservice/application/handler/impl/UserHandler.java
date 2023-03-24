@@ -35,6 +35,12 @@ public class UserHandler implements IUserHandler {
     }
 
     @Override
+    public UserResponseDto getEmail(String email) {
+        UsuarioModel usuarioModel=usuarioServicePort.getEmail(email);
+        return userResponseMapper.toResponse(usuarioModel);
+    }
+
+    @Override
     public UserResponseDto saveUsers(UserRequestDto userRequestDto) {
         UsuarioModel usuarioModel = userRequestMapper.toUser(userRequestDto);
         usuarioModel.setRol(new RolModel(1L,"propietario","Crear platos"));

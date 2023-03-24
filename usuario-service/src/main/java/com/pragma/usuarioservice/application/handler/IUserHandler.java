@@ -12,4 +12,6 @@ public interface IUserHandler {
 
     UserResponseDto getUserId(Long idUser);
 
+    UserResponseDto getEmail(String email);
+
 }

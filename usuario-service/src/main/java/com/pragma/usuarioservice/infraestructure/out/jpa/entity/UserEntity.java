@@ -39,12 +39,12 @@ public class UserEntity {
     private String celular;
 
     @Column
-    @NotBlank(message = "Debes especificar el correo")
-    private String correo;
+    @NotBlank(message = "Debes especificar el email")
+    private String email;
 
     @Column
     @NotBlank(message = "Debes especificar la clave")
-    private String clave;
+    private String password;
 
     @Size(max = 8,min = 8, message = "El maximo 8 numeros")
     @Column

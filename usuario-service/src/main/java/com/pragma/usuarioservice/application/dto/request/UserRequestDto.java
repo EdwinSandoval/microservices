@@ -15,9 +15,9 @@ public class UserRequestDto {
 
     private String celular;
 
-    private String correo;
+    private String email;
 
-    private String clave;
+    private String password;
 
     private String dni;
 

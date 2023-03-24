@@ -55,6 +55,11 @@ public class UserRestController {
         return ResponseEntity.ok(userHandler.getUserId(userId));
     }
 
+    @GetMapping("/username/{email}")
+    public ResponseEntity<UserResponseDto> getEmail(@PathVariable(name = "email") String email){
+        return ResponseEntity.ok(userHandler.getEmail(email));
+    }
+
     public void throwError(Errors errors){
         String mensaje="";
         int index=0;

@@ -47,4 +47,10 @@ public class UserJpaAdapter implements IUsuarioPersistencePort {
                 .orElseThrow(NoDataFoundException::new));
     }
 
+    @Override
+    public UsuarioModel getEmail(String email) {
+        return userEntityMapper.toUserModel(userRepository.findByEmail(email)
+                .orElseThrow(NoDataFoundException::new));
+    }
+
 }
