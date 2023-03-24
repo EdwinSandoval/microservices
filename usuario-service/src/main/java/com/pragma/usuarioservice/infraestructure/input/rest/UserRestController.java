@@ -3,9 +3,7 @@ package com.pragma.usuarioservice.infraestructure.input.rest;
 import com.pragma.usuarioservice.application.dto.request.UserRequestDto;
 import com.pragma.usuarioservice.application.dto.response.UserResponseDto;
 import com.pragma.usuarioservice.application.handler.IUserHandler;
-import com.pragma.usuarioservice.configuration.auth.Request.AuthenticationRequest;
-import com.pragma.usuarioservice.configuration.auth.Request.RegisterRequest;
-import com.pragma.usuarioservice.configuration.auth.Response.AuthenticationResponse;
+
 import com.pragma.usuarioservice.infraestructure.exception.ResponseJson.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -72,7 +70,7 @@ public class UserRestController {
 
     @GetMapping("/listar/{id}")
     public ResponseEntity<UserResponseDto> getUserId(@PathVariable(name = "id") Long userId){
-        return ResponseEntity.ok(userHandler.getUserId(1L));
+        return ResponseEntity.ok(userHandler.getUserId(userId));
     }
 
     public void throwError(Errors errors){
