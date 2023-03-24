@@ -1,4 +1,4 @@
-package com.example.serviceplazoleta.infraestructure.exceptionhandler;
+package com.example.serviceplazoleta.domain.exception.exceptionhandler;
 
 public enum ExceptionResponse {
 

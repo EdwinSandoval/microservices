@@ -26,9 +26,16 @@ import com.example.serviceplazoleta.infraestructure.out.jpa.repository.ICategori
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IPedidoRepository;
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IPlatoRepository;
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IRestauranteRepository;
+//import com.example.serviceplazoleta.security.service.LoginService;
+import com.example.serviceplazoleta.security.UserDetailsServiceImpl;
+import com.example.serviceplazoleta.security.filter.JWTAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
@@ -99,6 +106,30 @@ public class BeanConfiguration {
 
         return new RestauranteUseCase(restaurantePersistencePort());
     }
+
+    private final UserDetailsService userDetailsService;
+//    private final JWTAuthorizationFilter jwtAuthorizationFilter;
+    @Bean
+   public UserDetailsService userDetailsService(){
+       return new UserDetailsServiceImpl();
+   }
+
+
+//    @Bean
+//    UserDetailsService userDetailsService() {
+//        return new UserDetailsService() {
+//            @Override
+//            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//                return null;
+//            }
+//        };
+//    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
 
 //    private final IRestauranteRepository restauranteRepository;

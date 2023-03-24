@@ -1,23 +1,13 @@
 package com.example.serviceplazoleta.infraestructure.out.jpa.adapter;
 
-import com.example.serviceplazoleta.application.dto.response.PlatoResponseDto;
-import com.example.serviceplazoleta.application.dto.response.Restaurante.ObtenerRestauranteIdResponseDto;
-import com.example.serviceplazoleta.application.dto.response.User.UserResponseDto;
 import com.example.serviceplazoleta.domain.model.PlatoModel;
 import com.example.serviceplazoleta.domain.spi.IPlatoPersistencePort;
 import com.example.serviceplazoleta.infraestructure.client.IUserFeign;
 import com.example.serviceplazoleta.infraestructure.exception.NoDataFoundException;
-import com.example.serviceplazoleta.infraestructure.exception.NotRolException;
-import com.example.serviceplazoleta.infraestructure.exception.PlatoValidarException;
-import com.example.serviceplazoleta.infraestructure.exceptionhandler.ControllerAdvisor;
-import com.example.serviceplazoleta.infraestructure.input.rest.RestauranteRestController;
 import com.example.serviceplazoleta.infraestructure.out.jpa.entity.PlatoEntity;
-import com.example.serviceplazoleta.infraestructure.out.jpa.entity.RestauranteEntity;
 import com.example.serviceplazoleta.infraestructure.out.jpa.mapper.IPlatoEntityMapper;
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IPlatoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 

@@ -25,6 +25,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+
+  main:
+    allow-bean-definition-overriding: true
 #eureka:
 #  #  client:
 #  #    fetch-registry: false
