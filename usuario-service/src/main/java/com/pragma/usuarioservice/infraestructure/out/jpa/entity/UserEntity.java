@@ -45,11 +45,8 @@ public class UserEntity implements UserDetails {
     private String email;
 
     @Column
-<<<<<<< HEAD
     @NotBlank(message = "Debes especificar la clave")
-=======
     @NotBlank(message = "Debes especificar la password")
->>>>>>> 19968eaede9132f16e729d6e2710abf9d3b10c2a
     private String password;
 
     @Size(max = 8,min = 8, message = "El maximo 8 numeros")
