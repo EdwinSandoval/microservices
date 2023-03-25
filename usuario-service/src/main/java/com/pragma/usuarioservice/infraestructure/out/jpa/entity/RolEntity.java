@@ -21,7 +21,7 @@ public class RolEntity {
     private Long id;
 
     @Column()
-    private String nombre;
+    private String nombre="USER";
 
     @Column
     private String descripcion;

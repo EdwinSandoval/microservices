@@ -1,11 +1,8 @@
 package com.pragma.usuarioservice.infraestructure.input.rest;
 
 import com.pragma.usuarioservice.application.dto.request.RolRequestDto;
-import com.pragma.usuarioservice.application.dto.request.UserRequestDto;
 import com.pragma.usuarioservice.application.dto.response.RolResponseDto;
-import com.pragma.usuarioservice.application.dto.response.UserResponseDto;
 import com.pragma.usuarioservice.application.handler.IRolHandler;
-import com.pragma.usuarioservice.application.handler.IUserHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
