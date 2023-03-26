@@ -37,7 +37,6 @@ public class AuthenticationService {
                 )
         );
         var user=optionalDetailsUser(request.getEmail()).get();
-        System.out.println("ggggggggEEEEEEEEEEEEEEEEEEEEEEEEEE"+user);
         var jwtToken=jwtService.generateToken(user,user.getRol());
 
         return AuthenticationResponse.builder()

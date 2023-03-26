@@ -9,10 +9,7 @@ import lombok.Setter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//@Getter
-//@Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
+
 public class UsuarioModel {
 
     private Long id;

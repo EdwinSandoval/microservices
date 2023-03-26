@@ -24,30 +24,29 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    @NotBlank(message = "Debes especificar el nombre")
+    @Column( nullable = false, length = 30)
+//    @NotBlank(message = "Debes especificar el nombre")
     private  String nombre;
 
-    @Column
+    @Column(nullable = false, length = 20)
     @NotBlank(message = "Debes especificar el apellido")
     private String apellido;
 
 
-    @Size(max = 13, message = "El maximo es 13 numeros")
-    @Column
+    @Column(nullable = false, length = 13)
     @NotBlank(message = "Debes especificar el telefono")
     private String celular;
 
-    @Column
+    @Column(name = "email", nullable = false)
     @NotBlank(message = "Debes especificar el email")
     private String email;
 
-    @Column
+    @Column(name = "password", nullable = false)
     @NotBlank(message = "Debes especificar la clave")
     private String password;
 
     @Size(max = 8,min = 8, message = "El maximo 8 numeros")
-    @Column
+    @Column(name = "id_document", nullable = false)
     @NotBlank(message = "Debes especificar el dni")
     private String dni;//por preguntar
 
