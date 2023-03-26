@@ -6,7 +6,7 @@ import com.pragma.usuarioservice.application.dto.response.UserResponseDto;
 import java.util.List;
 
 public interface IUserHandler {
-    UserResponseDto saveUsers(UserRequestDto userRequestDto);
+    void saveUsers(UserRequestDto userRequestDto,Long idRol);
 
     List<UserResponseDto> getAllUsers();
 

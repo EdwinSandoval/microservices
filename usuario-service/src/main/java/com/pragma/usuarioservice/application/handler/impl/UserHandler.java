@@ -23,6 +23,8 @@ public class UserHandler implements IUserHandler {
     private final IUserRequestMapper userRequestMapper;
     private final IUserResponseMapper userResponseMapper;
 
+
+
     @Override
     public List<UserResponseDto> getAllUsers() {
         return userResponseMapper.toResponseList(usuarioServicePort.getAllUsers());
@@ -41,10 +43,10 @@ public class UserHandler implements IUserHandler {
     }
 
     @Override
-    public UserResponseDto saveUsers(UserRequestDto userRequestDto) {
+    public void saveUsers(UserRequestDto userRequestDto,Long idRol) {
         UsuarioModel usuarioModel = userRequestMapper.toUser(userRequestDto);
-        usuarioModel.setRol(new RolModel(1L,"propietario","Crear platos"));
-        return userResponseMapper.toResponse(usuarioServicePort.saveUsers(usuarioModel));
+//        usuarioModel.setRol(new RolModel(1L,"propietario","Crear platos"));
+        usuarioServicePort.saveUsers(usuarioModel,idRol);
     }
 
 }

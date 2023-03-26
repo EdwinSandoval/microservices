@@ -11,7 +11,6 @@ import com.example.serviceplazoleta.domain.model.RestauranteModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -26,9 +25,9 @@ public class RestauranteHandler  implements IRestauranteHandler {
 
 //    private final RestTemplate restTemplate;
     @Override
-    public RestauranteResponseDto guardarRestaurante(RestauranteRequestDto restauranteRequestDto) {
+    public void guardarRestaurante(RestauranteRequestDto restauranteRequestDto) {
         RestauranteModel restauranteModel = restauranteRequestMapper.toRestaurante(restauranteRequestDto);
-        return restauranteResponseMapper.toResponse(restauranteServicePort.guardarRestaurante(restauranteModel));
+        restauranteResponseMapper.toResponse(restauranteServicePort.guardarRestaurante(restauranteModel));
     }
 
     @Override

@@ -6,10 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "usuario")
@@ -25,32 +21,27 @@ public class UserEntity {
     private Long id;
 
     @Column( nullable = false, length = 30)
-//    @NotBlank(message = "Debes especificar el nombre")
     private  String nombre;
 
     @Column(nullable = false, length = 20)
-    @NotBlank(message = "Debes especificar el apellido")
     private String apellido;
 
 
     @Column(nullable = false, length = 13)
-    @NotBlank(message = "Debes especificar el telefono")
     private String celular;
 
-    @Column(name = "email", nullable = false)
-    @NotBlank(message = "Debes especificar el email")
+    @Column( nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false)
-    @NotBlank(message = "Debes especificar la clave")
+    @Column( nullable = false)
     private String password;
 
-    @Size(max = 8,min = 8, message = "El maximo 8 numeros")
-    @Column(name = "id_document", nullable = false)
-    @NotBlank(message = "Debes especificar el dni")
+
+    @Column( nullable = false)
     private String dni;//por preguntar
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE, fetch =
+            FetchType.EAGER)
     @JoinColumn(name = "idRol")//es el id que tiene la entidad rol
     private RolEntity rol;
 

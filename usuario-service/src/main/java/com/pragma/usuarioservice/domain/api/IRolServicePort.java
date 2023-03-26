@@ -9,4 +9,5 @@ public interface IRolServicePort {
     void saveRol(RolModel rolModel);
 
     List<RolModel> getAllRols();
+    RolModel getRolId(Long idRol);
 }

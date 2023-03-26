@@ -28,14 +28,46 @@ public class UserRestController {
 //            @ApiResponse(responseCode = "201", description = "Object created", content = @Content),
 //            @ApiResponse(responseCode = "409", description = "Object already exists", content = @Content)
 //    })
-    @PostMapping("/guardar")
-    public ResponseEntity<Void> saveUser(@RequestBody UserRequestDto userRequestDto,Errors errors) {
+//    @PostMapping("/guardar")
+//    public ResponseEntity<Void> saveUser(@RequestBody UserRequestDto userRequestDto,Errors errors) {
+//        if (errors.hasErrors()){
+//            throwError(errors);
+//        }
+//        userHandler.saveUsers(userRequestDto);
+//        return new ResponseEntity<>(HttpStatus.CREATED);
+//    }
+
+    @PostMapping("/guardarPropietario")
+    public ResponseEntity<Void> saveUserPropietary(@Validated @RequestBody UserRequestDto userRequestDto, Errors errors) {
         if (errors.hasErrors()){
             throwError(errors);
         }
-        userHandler.saveUsers(userRequestDto);
+        userHandler.saveUsers(userRequestDto,2L);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+    @PostMapping("/guardarCliente")
+    public ResponseEntity<Void> saveUserClient(@Validated @RequestBody UserRequestDto userRequestDto, Errors errors) {
+        if (errors.hasErrors()){
+            throwError(errors);
+        }
+//        if (idRol.equals(3)){
+        userHandler.saveUsers(userRequestDto,3L);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+//        }
+    }
+
+    @PostMapping("/guardarEmpleado")
+    public ResponseEntity<Void> saveUserEmployee(@Validated @RequestBody UserRequestDto userRequestDto, Errors errors) {
+        if (errors.hasErrors()){
+            throwError(errors);
+        }
+//        if (idRol.equals(3)){
+            userHandler.saveUsers(userRequestDto,4L);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+//        }
+    }
+
+
 
 //    @Operation(summary = "Get all objects")
 //    @ApiResponses(value = {
@@ -59,6 +91,7 @@ public class UserRestController {
     public ResponseEntity<UserResponseDto> getEmail(@PathVariable("email") String email){
         return ResponseEntity.ok(userHandler.getEmail(email));
     }
+
 
     public void throwError(Errors errors){
         String mensaje="";

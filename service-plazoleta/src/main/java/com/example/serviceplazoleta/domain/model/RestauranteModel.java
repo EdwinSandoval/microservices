@@ -11,7 +11,7 @@ import lombok.Setter;
 //@NoArgsConstructor
 public class RestauranteModel {
 
-    private Long id;
+    private Long idRestaurante;
     private String nombre;
     private String direccion;
     private String telefono;
@@ -19,8 +19,8 @@ public class RestauranteModel {
     private String nit;
     private Long idPropietario;
 
-    public RestauranteModel(Long id, String nombre, String direccion, String telefono, String urlLogo, String nit, Long idPropietario) {
-        this.id = id;
+    public RestauranteModel(Long idRestaurante, String nombre, String direccion, String telefono, String urlLogo, String nit, Long idPropietario) {
+        this.idRestaurante = idRestaurante;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -32,12 +32,12 @@ public class RestauranteModel {
     public RestauranteModel() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdRestaurante() {
+        return idRestaurante;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdRestaurante(Long idRestaurante) {
+        this.idRestaurante = idRestaurante;
     }
 
     public String getNombre() {
@@ -94,5 +94,21 @@ public class RestauranteModel {
 
     public boolean validarTelefono(){
         return this.telefono.matches("/d");
+    }
+
+    public boolean numeroTelefonoValido(){
+        String numero=this.telefono;
+        if ((numero.substring(0,1).equals("+") && numero.substring(1,numero.length()).matches("[0-9]*")) ||
+                numero.substring(0,numero.length()).matches("[0-9]*")  ){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validarNombre(){
+        if ((this.nombre.matches(".*\\d.*") && this.nombre.matches(".*[a-zA-Z].*")) || this.nombre.matches(".*[a-zA-Z].*")){
+            return true;
+        }
+        return false;
     }
 }

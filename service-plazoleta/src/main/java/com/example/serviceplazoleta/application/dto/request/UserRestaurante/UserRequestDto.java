@@ -1,7 +1,5 @@
-package com.pragma.usuarioservice.application.dto.request;
+package com.example.serviceplazoleta.application.dto.request.UserRestaurante;
 
-import com.pragma.usuarioservice.domain.model.RolModel;
-import com.pragma.usuarioservice.infraestructure.out.jpa.entity.RolEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotBlank;
@@ -9,11 +7,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
 @Getter
 @Setter
 public class UserRequestDto {
-    //solamente van los campos que interesan al hacer una peticion
     @NotBlank(message = "El campo nombre es obligatorio")
     private String nombre;
     @NotBlank(message = "El campo apellido es obligatorio")
@@ -29,6 +25,4 @@ public class UserRequestDto {
     @Pattern(regexp = "^[0-9]*$", message = "El documento de identidad debe ser numerico")
     @Size(min = 5, max=11, message = "no es valida")
     private String dni;
-
-//    private UserRolRequestDto rol;//
 }

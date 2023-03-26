@@ -7,6 +7,7 @@ import com.pragma.usuarioservice.application.mapper.IRolRequestMapper;
 import com.pragma.usuarioservice.application.mapper.IRolResponseMapper;
 import com.pragma.usuarioservice.domain.api.IRolServicePort;
 import com.pragma.usuarioservice.domain.model.RolModel;
+import com.pragma.usuarioservice.domain.model.UsuarioModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +33,12 @@ public class RolHandler implements IRolHandler {
     public List<RolResponseDto> getAllRols() {
 
         return rolResponseMapper.toResponseList(rolServicePort.getAllRols());
+    }
+
+    @Override
+    public RolResponseDto getRolId(Long idRol) {
+        RolModel rolModel=rolServicePort.getRolId(idRol);
+        return rolResponseMapper.toResponse(rolModel);
     }
 
 

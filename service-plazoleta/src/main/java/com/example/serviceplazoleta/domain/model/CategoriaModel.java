@@ -11,25 +11,22 @@ import lombok.Setter;
 //@NoArgsConstructor
 public class CategoriaModel {
 
-    private Long id;
+    private Long idCategoria;
     private String nombre;
     private String descripcion;
 
-    public CategoriaModel(Long id, String nombre, String descripcion) {
-        this.id = id;
+    public CategoriaModel(Long idCategoria, String nombre, String descripcion) {
+        this.idCategoria = idCategoria;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
 
-    public CategoriaModel() {
+    public Long getIdCategoria() {
+        return idCategoria;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public String getNombre() {

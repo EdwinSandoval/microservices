@@ -22,32 +22,24 @@ public class PlatoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    @NotBlank
-    @NotNull(message = "Debes especificar el nombre")
+    @Column(nullable = false)
     private String nombre;
 
-    @Column
-    @NotBlank
-    @NotNull(message = "Debes especificar la descripcion")
+    @Column(nullable = false)
     private String descripcion;
 
-    @Column
-    @NotNull(message = "Debes especificar el precio")
+    @Column(nullable = false)
     private int precio;
 
-    @Column
-    @NotBlank
-    @NotNull(message = "Debes especificar la url")
+    @Column(nullable = false)
     private String urlImagen;
 
     @Column
-    @ColumnDefault("1")
     private Boolean activo;
 
     @ManyToOne
 //    @NotNull(message = "Debes especificar la categoria")
-    @JoinColumn(name = "idCategoria")
+    @JoinColumn(name = "idCategoria",nullable = false)
     private CategoriaEntity categoria;
 
     @ManyToOne

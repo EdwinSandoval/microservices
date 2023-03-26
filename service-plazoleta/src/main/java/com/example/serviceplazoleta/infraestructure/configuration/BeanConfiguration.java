@@ -83,11 +83,14 @@ public class BeanConfiguration {
     private final IPlatoRepository platoRepository;
     private final IPlatoEntityMapper platoEntityMapper;
     private final IUserFeign iUserFeign;
-//    private final RestauranteRestController restauranteRestController;
+    private final IRestauranteRepository restauranteRepository;
+    private final IRestauranteEntityMapper restauranteEntityMapper;
+
+    //    private final RestauranteRestController restauranteRestController;
     @Bean
     public IPlatoPersistencePort platoPersistencePort() {
 
-        return new PlatoJpaAdapter(platoRepository, platoEntityMapper,iUserFeign);
+        return new PlatoJpaAdapter(platoRepository, categoriaRepository,restauranteRepository,platoEntityMapper,categoriaEntityMapper,restauranteEntityMapper,iUserFeign);
     }
 
     @Bean
@@ -98,8 +101,7 @@ public class BeanConfiguration {
 
     //****************************************************************************
 
-    private final IRestauranteRepository restauranteRepository;
-    private final IRestauranteEntityMapper restauranteEntityMapper;
+
 
     @Bean
     public IRestaurantePersistencePort restaurantePersistencePort() {
