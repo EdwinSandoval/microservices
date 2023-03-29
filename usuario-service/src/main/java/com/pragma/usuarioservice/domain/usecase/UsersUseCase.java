@@ -26,6 +26,8 @@ public class UsersUseCase  implements IUsuarioServicePort {
         usuarioModel.setPassword(encoderPassword);
         usuarioModel.setRol(rolPersistencePort.getRoleById(idRol));
         usuarioPersistencePort.saveUsers(usuarioModel);
+
+
     }
 
     @Override
