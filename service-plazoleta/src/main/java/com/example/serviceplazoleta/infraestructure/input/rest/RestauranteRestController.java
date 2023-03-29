@@ -1,6 +1,7 @@
 package com.example.serviceplazoleta.infraestructure.input.rest;
 
 import com.example.serviceplazoleta.application.dto.request.RestauranteRequestDto;
+import com.example.serviceplazoleta.application.dto.response.Restaurante.ListarRestauranteResponseDto;
 import com.example.serviceplazoleta.application.dto.response.Restaurante.ObtenerRestauranteIdResponseDto;
 import com.example.serviceplazoleta.application.dto.response.RestauranteResponseDto;
 import com.example.serviceplazoleta.application.handler.IRestauranteHandler;
@@ -27,7 +28,16 @@ public class RestauranteRestController {
     @GetMapping("/listar")
     public ResponseEntity<List<RestauranteResponseDto>> listarRestaurantes() {
 
-        return ResponseEntity.ok(restauranteHandler.listarRestaurantes());
+        return ResponseEntity.ok( restauranteHandler.listarRestaurantes());
+    }
+    @GetMapping("/listarTodos/{elementosPorPag}/{numeroPag}")
+    public ResponseEntity<List<ListarRestauranteResponseDto>> listarRestaurantesPaginados(
+            @PathVariable("numeroPag") Integer numeroPag,
+            @PathVariable("elementosPorPag") Integer elementosPorPag
+    ) {
+
+        return ResponseEntity.ok(restauranteHandler.listarRestaurantesPaginados(numeroPag,
+                elementosPorPag));
     }
 
     @GetMapping("/{id}")

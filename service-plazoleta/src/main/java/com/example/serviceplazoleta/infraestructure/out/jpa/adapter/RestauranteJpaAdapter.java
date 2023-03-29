@@ -11,8 +11,12 @@ import com.example.serviceplazoleta.infraestructure.out.jpa.mapper.IRestauranteE
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IRestauranteRepository;
 //import com.example.serviceplazoleta.infraestructure.out.jpa.repository.Usuario.IUsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class RestauranteJpaAdapter implements IRestaurantePersistencePort {
@@ -31,7 +35,7 @@ public class RestauranteJpaAdapter implements IRestaurantePersistencePort {
             }catch(Exception exception) {
                 throw new RuntimeException();
             }
-            if (!userResponseDto.getRol().getNombre().equals("propietario") ){
+            if (!userResponseDto.getRol().getNombre().equals("PROPIETARIO") ){
                 throw new NotRolException("No existe el Propietario ingresado");
             }
             if (!restauranteModel.numeroTelefonoValido()){
@@ -46,26 +50,6 @@ public class RestauranteJpaAdapter implements IRestaurantePersistencePort {
         return restauranteEntityMapper.toRestauranteModel(restauranteEntity);
     }
 
-    ////////////////////////////////////////
-//    @Override
-//    public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
-//        if (restauranteRepository.findById(restauranteModel.getId()).isPresent()) {
-//            throw new RestaurantExistsException("Existe restaurante");
-//        }
-//        return restauranteModel;
-//    }
-        ///////////////////////////////////
-
-//        UserResponseDto userResponseDto=new UserResponseDto();
-////        UserResponseDto userResponseDto= iUserRestaurante.guardarUsuario(new UserResponseDto(restauranteModel.getIdPropietario())).getBody();
-//
-//        restauranteModel.setIdPropietario(userResponseDto.getId());
-//       return  restauranteRepository.save(restauranteModel);
-
-
-
-
-
     @Override
     public List<RestauranteModel> listarRestaurantes() {
         List<RestauranteEntity> entityList = restauranteRepository.findAll();
@@ -79,6 +63,18 @@ public class RestauranteJpaAdapter implements IRestaurantePersistencePort {
     public RestauranteModel obtenerRestauranteId(Long idRest) {
         return restauranteEntityMapper.toRestauranteModel(restauranteRepository.findById(idRest)
                 .orElseThrow(NoDataFoundException::new));
+    }
+
+    @Override
+    public List<RestauranteModel> listarRestaurantesPaginados(Integer numeroPaginas,
+                                                              Integer elementoPorPagina) {
+        Pageable pageable = PageRequest.of(numeroPaginas, elementoPorPagina,
+                Sort.by("nombre"));
+
+        return restauranteRepository.findAll(pageable)
+                .stream()
+                .map(restauranteEntityMapper::toRestauranteModel)
+                .collect(Collectors.toList());
     }
 
 

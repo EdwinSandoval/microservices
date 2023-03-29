@@ -33,4 +33,10 @@ public class CategoriaHandler implements ICategoriaHandler {
         return categoriaResponseMapper.toResponseList(categoriaServicePort.listarCategorias());
     }
 
+    @Override
+    public List<CategoriaResponseDto> listarCategoriasPaginados(Integer numeroPaginas, Integer elementoPorPagina) {
+        return categoriaResponseMapper.toResponseList(categoriaServicePort
+                .listarCategoriasPaginados(numeroPaginas,
+                        elementoPorPagina));
+    }
 }

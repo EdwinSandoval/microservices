@@ -2,6 +2,7 @@ package com.example.serviceplazoleta.infraestructure.input.rest;
 
 import com.example.serviceplazoleta.application.dto.request.CategoriaRequestDto;
 import com.example.serviceplazoleta.application.dto.response.CategoriaResponseDto;
+import com.example.serviceplazoleta.application.dto.response.Restaurante.ListarRestauranteResponseDto;
 import com.example.serviceplazoleta.application.handler.ICategoriaHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,4 +29,16 @@ public class CategoriaRestController {
 
         return ResponseEntity.ok(categoriaHandler.listarCategorias());
     }
+
+    @GetMapping("/listarTodos/{elementosPorPag}/{numeroPag}")
+    public ResponseEntity<List<CategoriaResponseDto>> listarCategoriaPaginados(
+            @PathVariable("numeroPag") Integer numeroPag,
+            @PathVariable("elementosPorPag") Integer elementosPorPag
+    ) {
+
+        return ResponseEntity.ok(categoriaHandler.listarCategoriasPaginados(numeroPag,
+                elementosPorPag));
+    }
+
+
 }

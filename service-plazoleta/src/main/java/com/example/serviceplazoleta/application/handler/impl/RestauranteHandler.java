@@ -1,6 +1,7 @@
 package com.example.serviceplazoleta.application.handler.impl;
 
 import com.example.serviceplazoleta.application.dto.request.RestauranteRequestDto;
+import com.example.serviceplazoleta.application.dto.response.Restaurante.ListarRestauranteResponseDto;
 import com.example.serviceplazoleta.application.dto.response.Restaurante.ObtenerRestauranteIdResponseDto;
 import com.example.serviceplazoleta.application.dto.response.RestauranteResponseDto;
 import com.example.serviceplazoleta.application.handler.IRestauranteHandler;
@@ -33,6 +34,14 @@ public class RestauranteHandler  implements IRestauranteHandler {
     @Override
     public List<RestauranteResponseDto> listarRestaurantes() {
         return restauranteResponseMapper.toResponseList(restauranteServicePort.listarRestaurantes());
+    }
+
+    @Override
+    public List<ListarRestauranteResponseDto> listarRestaurantesPaginados(Integer numeroPaginas,
+                                                                          Integer elementoPorPagina) {
+        return restauranteResponseMapper.toResponseListRestauranteDto(restauranteServicePort
+                .listarRestaurantesPaginados(numeroPaginas,
+                         elementoPorPagina));
     }
 
     @Override

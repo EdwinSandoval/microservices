@@ -7,8 +7,13 @@ import com.example.serviceplazoleta.infraestructure.out.jpa.entity.CategoriaEnti
 import com.example.serviceplazoleta.infraestructure.out.jpa.mapper.ICategoriaEntityMapper;
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.ICategoriaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 public class CategoriaJpaAdapter implements ICategoriaPersistencePort {
 
@@ -27,5 +32,16 @@ public class CategoriaJpaAdapter implements ICategoriaPersistencePort {
             throw new NoDataFoundException();
         }
         return categoriaEntityMapper.toCategoriaModelList(entityList);
+    }
+
+    @Override
+    public List<CategoriaModel> listarCategoriaPaginados(Integer numeroPaginas, Integer elementoPorPagina) {
+        Pageable pageable = PageRequest.of(numeroPaginas, elementoPorPagina,
+                Sort.by("nombre"));
+
+        return categoriaRepository.findAll(pageable)
+                .stream()
+                .map(categoriaEntityMapper::toCategoriaModel)
+                .collect(Collectors.toList());
     }
 }

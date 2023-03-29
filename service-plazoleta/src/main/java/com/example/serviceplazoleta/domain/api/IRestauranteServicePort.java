@@ -11,6 +11,8 @@ public interface IRestauranteServicePort {
     RestauranteModel guardarRestaurante(RestauranteModel restauranteModel);
 
     List<RestauranteModel> listarRestaurantes();
+    List<RestauranteModel> listarRestaurantesPaginados(Integer numeroPaginas,
+                                              Integer elementoPorPagina);
 
     RestauranteModel obtenerRestauranteId(Long idRest);
 }

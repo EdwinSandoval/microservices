@@ -13,6 +13,9 @@ public interface IRestaurantePersistencePort {
     List<RestauranteModel> listarRestaurantes();
 
     RestauranteModel obtenerRestauranteId(Long idRest);
+    List<RestauranteModel> listarRestaurantesPaginados(Integer numeroPaginas,
+                                                      Integer elementoPorPagina);
+
 //    RestauranteResponseDto ObtenerRestauranteId(Long idRest);
 }
 

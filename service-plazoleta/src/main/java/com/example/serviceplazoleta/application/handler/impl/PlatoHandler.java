@@ -1,16 +1,24 @@
 package com.example.serviceplazoleta.application.handler.impl;
 
+import com.example.serviceplazoleta.application.dto.request.Plato.ActualizarEstadoPlatoRequest;
 import com.example.serviceplazoleta.application.dto.request.Plato.ActualizarPlatoRequest;
 import com.example.serviceplazoleta.application.dto.request.PlatoRequestDto;
 import com.example.serviceplazoleta.application.dto.response.Plato.BuscarPlatoIdResponseDto;
+import com.example.serviceplazoleta.application.dto.response.Plato.PlatoPaginadoResponseDto;
 import com.example.serviceplazoleta.application.dto.response.PlatoResponseDto;
 import com.example.serviceplazoleta.application.handler.IPlatoHandler;
+import com.example.serviceplazoleta.application.mapper.IPlatoPaginadoDtoMapper;
 import com.example.serviceplazoleta.application.mapper.IPlatoRequestMapper;
 import com.example.serviceplazoleta.application.mapper.IPlatoResponseMapper;
+import com.example.serviceplazoleta.application.mapper.IRestauranteRequestMapper;
 import com.example.serviceplazoleta.domain.api.IPlatoServicePort;
-import com.example.serviceplazoleta.domain.model.CategoriaModel;
+import com.example.serviceplazoleta.domain.api.IRestauranteServicePort;
 import com.example.serviceplazoleta.domain.model.PlatoModel;
+import com.example.serviceplazoleta.domain.model.RestauranteModel;
+import com.example.serviceplazoleta.infraestructure.out.jpa.entity.RestauranteEntity;
+import com.example.serviceplazoleta.infraestructure.out.jpa.mapper.IRestauranteEntityMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,12 +32,14 @@ public class PlatoHandler  implements IPlatoHandler {
     private final IPlatoServicePort platoServicePort;
     private final IPlatoRequestMapper platoRequestMapper;
     private final IPlatoResponseMapper platoResponseMapper;
+//    private final IPlatoPaginadoDtoMapper iPlatoPaginadoDtoMapper;
+
 
     @Override
-    public PlatoResponseDto guardarPlato(PlatoRequestDto platoRequestDto) {
+    public void guardarPlato(Long idProp,PlatoRequestDto platoRequestDto) {
         PlatoModel platoModel = platoRequestMapper.toPlato(platoRequestDto);
         platoModel.setActivo(true);
-        return platoResponseMapper.toResponse(platoServicePort.guardarPlato(platoModel));
+        platoResponseMapper.toResponse(platoServicePort.guardarPlato(idProp,platoModel));
     }
 
     @Override
@@ -38,26 +48,25 @@ public class PlatoHandler  implements IPlatoHandler {
     }
 
     @Override
-    public void actualizarPlato(ActualizarPlatoRequest actualizarPlatoRequest) {
-        PlatoModel platoAntiguo=platoServicePort.buscarPlatoId(actualizarPlatoRequest.getId());
-       if (platoAntiguo!=null){
-           PlatoModel platoModel=new PlatoModel();
+    public void actualizarPlato(ActualizarPlatoRequest actualizarPlatoRequest,Long idProp) {
 
-           platoModel.setId(platoAntiguo.getId());
-           platoModel.setNombre(platoAntiguo.getNombre());
-           platoModel.setPrecio(actualizarPlatoRequest.getPrecio());
-           platoModel.setDescripcion(actualizarPlatoRequest.getDescripcion());
-           platoModel.setUrlImagen(platoAntiguo.getUrlImagen());
-           platoModel.setActivo(platoAntiguo.isActivo());
-           platoModel.setCategoria(platoAntiguo.getCategoria());
-           platoModel.setRestaurant(platoAntiguo.getRestaurant());
+        PlatoModel platoModel=platoRequestMapper.toActualizarPlato(actualizarPlatoRequest);
+        platoServicePort.actualizarPlato(platoModel,idProp);
 
+    }
+
+    @Override
+    public void actualizarEstadoPlato(ActualizarEstadoPlatoRequest estado,Long idProp) {
+        PlatoModel platoModel=platoRequestMapper.toActualizarEstadoPlato(estado);
+        platoServicePort.actualizarEstadoPlato(platoModel,idProp);
+    }
 
 
-           platoServicePort.actualizarPlato(platoModel);
-       }
-
-
+    @Override
+    public List<PlatoPaginadoResponseDto> listarPlatosPaginados(Long idRest, Integer numeroPaginas, Integer elementoPorPagina) {
+        return platoResponseMapper.toPlatoPaginado(platoServicePort
+                .listarPlatosPaginados(idRest,numeroPaginas,
+                        elementoPorPagina));
     }
 
     @Override

@@ -23,10 +23,16 @@ public class PedidoEntity {
     private Long id;
 
     @Column
+    Long idCliente;
+
+    @Column
     private Date fecha;
 
     @Column
     private boolean estado;
+
+    @Column
+    private Long idChef;
 
     @ManyToOne
     @JoinColumn(name = "idRestaurante")

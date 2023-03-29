@@ -37,6 +37,14 @@ public class UserRestController {
 //        return new ResponseEntity<>(HttpStatus.CREATED);
 //    }
 
+    @PostMapping("/guardarAdmin")
+    public ResponseEntity<Void> saveUserAdmin(@Validated @RequestBody UserRequestDto userRequestDto, Errors errors) {
+        if (errors.hasErrors()){
+            throwError(errors);
+        }
+        userHandler.saveUsers(userRequestDto,1L);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
     @PostMapping("/guardarPropietario")
     public ResponseEntity<Void> saveUserPropietary(@Validated @RequestBody UserRequestDto userRequestDto, Errors errors) {
         if (errors.hasErrors()){

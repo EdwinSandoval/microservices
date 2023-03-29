@@ -23,6 +23,8 @@ public interface IUserFeign {
     public void guardarCliente(@RequestBody UserRequestDto userRequestDto);
 
     @PostMapping("/guardarEmpleado")
-    public void saveUserAsClient(@RequestBody UserRequestDto userRequestDto);
+    public void guardarEmpleado(@RequestBody UserRequestDto userRequestDto);
 
+    @PostMapping("/guardarAdmin")
+    public void guardarAdministrador(@RequestBody UserRequestDto userRequestDto);
 }

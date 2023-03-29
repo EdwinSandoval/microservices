@@ -25,7 +25,6 @@ public class UsersUseCase  implements IUsuarioServicePort {
         String encoderPassword=encryptPassword.encryptPassword(usuarioModel.getPassword());
         usuarioModel.setPassword(encoderPassword);
         usuarioModel.setRol(rolPersistencePort.getRoleById(idRol));
-//        usuarioModel.setId(-1L);
         usuarioPersistencePort.saveUsers(usuarioModel);
     }
 

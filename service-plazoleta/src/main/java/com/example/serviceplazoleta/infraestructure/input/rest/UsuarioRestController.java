@@ -21,7 +21,7 @@ public class UsuarioRestController {
     private final IUserFeign iUserFeign;
 
     @PostMapping("/guardarPropietario")
-    public ResponseEntity<Void> saveUserAsOwner(@Valid @RequestBody UserRequestDto userRequestDto){
+    public ResponseEntity<Void> guardarPropietario(@Valid @RequestBody UserRequestDto userRequestDto){
 //        try{
 //            UserResponseDto userResponseDto = iUserFeign.obtenerEmail(userRequestDto.getEmail());
 //        }
@@ -33,7 +33,7 @@ public class UsuarioRestController {
     }
 
     @PostMapping("/guardarCliente")
-    public ResponseEntity<Void> saveUserAsClient(@Valid @RequestBody UserRequestDto userRequestDto){
+    public ResponseEntity<Void> guardarCliente(@Valid @RequestBody UserRequestDto userRequestDto){
 //        try{
 //            UserResponseDto userResponseDto = iUserFeign.obtenerEmail(userRequestDto.getEmail());
 //        }
@@ -42,5 +42,17 @@ public class UsuarioRestController {
             return new ResponseEntity<>(HttpStatus.CREATED);
 //        }
 //        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/guardarEmpleado")
+    public ResponseEntity<Void> guardarEmpleado(@Valid @RequestBody UserRequestDto userRequestDto){
+        iUserFeign.guardarEmpleado(userRequestDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/guardarAdmin")
+    public ResponseEntity<Void> guardarAdministrador(@Valid @RequestBody UserRequestDto userRequestDto){
+        iUserFeign.guardarAdministrador(userRequestDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

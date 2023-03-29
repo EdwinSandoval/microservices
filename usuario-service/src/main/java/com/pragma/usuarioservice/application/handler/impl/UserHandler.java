@@ -6,7 +6,6 @@ import com.pragma.usuarioservice.application.handler.IUserHandler;
 import com.pragma.usuarioservice.application.mapper.IUserRequestMapper;
 import com.pragma.usuarioservice.application.mapper.IUserResponseMapper;
 import com.pragma.usuarioservice.domain.api.IUsuarioServicePort;
-import com.pragma.usuarioservice.domain.model.RolModel;
 import com.pragma.usuarioservice.domain.model.UsuarioModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

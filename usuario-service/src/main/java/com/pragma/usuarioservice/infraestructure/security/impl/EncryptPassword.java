@@ -17,7 +17,8 @@ public class EncryptPassword implements IEncryptPassword {
 
     @Override
     public String encryptPassword(String password) {
-       return passwordEncoder.encode(password);
+
+        return passwordEncoder.encode(password);
     }
 
     @Override

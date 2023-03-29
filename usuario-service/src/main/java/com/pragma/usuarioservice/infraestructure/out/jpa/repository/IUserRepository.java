@@ -1,5 +1,6 @@
 package com.pragma.usuarioservice.infraestructure.out.jpa.repository;
 
+import com.pragma.usuarioservice.domain.model.UsuarioModel;
 import com.pragma.usuarioservice.infraestructure.out.jpa.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,7 +11,7 @@ public interface IUserRepository extends JpaRepository<UserEntity,Long> {
 
     Optional<UserEntity> findByEmail(String email);
 //
-//    void deleteById(Long idUser);
-
+//    Boolean selectExistsEmail(String email);
+//    UsuarioModel findByIdUser(Long id);
 
 }

@@ -23,10 +23,15 @@ import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IPlatoRep
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IRestauranteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class PlatoJpaAdapter implements IPlatoPersistencePort {
@@ -42,22 +47,10 @@ public class PlatoJpaAdapter implements IPlatoPersistencePort {
 //    @Autowired
 //    private RestauranteRestController restauranteRestController;
     @Override
-    public PlatoModel guardarPlato(PlatoModel platoModel) {
-
-        PlatoEntity platoEntity=platoEntityMapper.toEntity(platoModel);
-        CategoriaEntity existeCategoria = categoriaRepository.findByIdCategoria(platoModel.getCategoria().getIdCategoria());
-        RestauranteEntity existeRest = restauranteRepository.findByIdRestaurante(platoModel.getRestaurant().getIdRestaurante());
-
-        if (existeCategoria!=null && existeRest!=null) {
-            platoEntity.setCategoria(categoriaRepository.findByIdCategoria(platoModel.getCategoria().getIdCategoria()));
-            platoEntity.setRestaurant(restauranteRepository.findByIdRestaurante(platoModel.getRestaurant().getIdRestaurante()));
-            return platoEntityMapper.toPlatoModel(platoRepository.save(platoEntity));
-
-        }
-
-        throw new NoDataFoundException();
-//        PlatoEntity platoEntity = platoRepository.save(platoEntityMapper.toEntity(platoModel));
-
+    public PlatoModel guardarPlato(Long idProp ,PlatoModel platoModel) {
+        PlatoEntity platoEntity = platoRepository.save(platoEntityMapper.toEntity(platoModel));
+        return platoEntityMapper.toPlatoModel(platoEntity);
+//
     }
 
     @Override
@@ -70,9 +63,23 @@ public class PlatoJpaAdapter implements IPlatoPersistencePort {
     }
 
     @Override
-    public void actualizarPlato(PlatoModel platoModel) {
-
+    public void actualizarPlato(PlatoModel platoModel,Long idProp) {
         platoRepository.save(platoEntityMapper.toEntity(platoModel));
+    }
+
+    @Override
+    public void actualizarEstadoPlato(PlatoModel platoModel, Long idProp) {
+        platoRepository.save(platoEntityMapper.toEntity(platoModel));
+    }
+
+    @Override
+    public List<PlatoModel> listarPlatosPaginados(Long idRest, Integer numeroPaginas, Integer elementoPorPagina) {
+        Pageable pageable = PageRequest.of(numeroPaginas, elementoPorPagina);
+
+        return platoRepository.agruparPorCategoria(idRest,pageable)
+                .stream()
+                .map(platoEntityMapper::toPlatoModel)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -37,7 +37,7 @@ public class AuthenticationService {
                 )
         );
         var user=optionalDetailsUser(request.getEmail()).get();
-        var jwtToken=jwtService.generateToken(user,user.getRol());
+        var jwtToken=jwtService.generateToken(user,user.getRol() );
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
@@ -48,13 +48,13 @@ public class AuthenticationService {
         UserResponseDto userResponseDto = iUserFeign.obtenerEmail(username);
         DetailsUser user = userDetailsMapper.toUser(userResponseDto);
         user.setRol(userResponseDto.getRol().getNombre());
-        return Optional.of(user);
+        return Optional.of(user);//retorna el usuario buscado
     }
 
 //    public UserAuthDto getUserAuth(String email) {
 //        UserResponseDto userResponseDto;
 //        try{
-//            userResponseDto = userClientFeign.getUserByEmail(email);
+//            userResponseDto = iUserFeign.obtenerEmail(email);
 //        }
 //        catch (Exception e){
 //            throw new RuntimeException();

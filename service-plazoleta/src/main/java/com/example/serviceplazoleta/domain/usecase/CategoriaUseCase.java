@@ -23,4 +23,9 @@ public class CategoriaUseCase implements ICategoriaServicePort {
     public List<CategoriaModel> listarCategorias() {
         return categoriaPersistencePort.listarCategorias();
     }
+
+    @Override
+    public List<CategoriaModel> listarCategoriasPaginados(Integer numeroPaginas, Integer elementoPorPagina) {
+        return categoriaPersistencePort.listarCategoriaPaginados(numeroPaginas, elementoPorPagina);
+    }
 }
