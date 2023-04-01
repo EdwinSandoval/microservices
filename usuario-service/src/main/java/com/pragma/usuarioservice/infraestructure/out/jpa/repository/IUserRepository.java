@@ -10,8 +10,6 @@ public interface IUserRepository extends JpaRepository<UserEntity,Long> {
     //estos metodos son para buscar por otro atributo que no sea el id
 
     Optional<UserEntity> findByEmail(String email);
-//
-//    Boolean selectExistsEmail(String email);
-//    UsuarioModel findByIdUser(Long id);
+
 
 }

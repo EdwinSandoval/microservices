@@ -1,4 +1,4 @@
-package com.pragma.usuarioservice.configuration;
+package com.pragma.usuarioservice.infraestructure.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

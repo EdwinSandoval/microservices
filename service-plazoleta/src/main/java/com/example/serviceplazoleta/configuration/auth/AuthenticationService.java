@@ -36,20 +36,20 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        var user=optionalDetailsUser(request.getEmail()).get();
-        var jwtToken=jwtService.generateToken(user,user.getRol() );
+//        var user=optionalDetailsUser(request.getEmail()).get();
+//        var jwtToken=jwtService.generateToken(user,user.getRol() );
 
         return AuthenticationResponse.builder()
-                .token(jwtToken)
+//                .token(jwtToken)
                 .build();
     }
 
-    private Optional<DetailsUser> optionalDetailsUser(String username) {
-        UserResponseDto userResponseDto = iUserFeign.obtenerEmail(username);
-        DetailsUser user = userDetailsMapper.toUser(userResponseDto);
-        user.setRol(userResponseDto.getRol().getNombre());
-        return Optional.of(user);//retorna el usuario buscado
-    }
+//    private Optional<DetailsUser> optionalDetailsUser(String username) {
+//        UserResponseDto userResponseDto = iUserFeign.obtenerEmail(username);
+//        DetailsUser user = userDetailsMapper.toUser(userResponseDto);
+//        user.setRol(userResponseDto.getRol().getNombre());
+//        return Optional.of(user);//retorna el usuario buscado
+//    }
 
 //    public UserAuthDto getUserAuth(String email) {
 //        UserResponseDto userResponseDto;

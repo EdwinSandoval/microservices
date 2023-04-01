@@ -14,9 +14,9 @@ import javax.persistence.*;
 @Setter
 public class Pedido_PlatosEntity {
     @Id
-    @Column(name = "IdPedidoPlatos")
+    @Column(name = "idPedidoPlatos")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long IdPedidoPlatos;
+    private Long idPedidoPlatos;
 
     @Column
     private int cantidad;

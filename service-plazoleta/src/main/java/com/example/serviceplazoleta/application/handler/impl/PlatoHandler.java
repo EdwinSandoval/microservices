@@ -38,7 +38,7 @@ public class PlatoHandler  implements IPlatoHandler {
     @Override
     public void guardarPlato(Long idProp,PlatoRequestDto platoRequestDto) {
         PlatoModel platoModel = platoRequestMapper.toPlato(platoRequestDto);
-        platoModel.setActivo(true);
+//        platoModel.setActivo(true);
         platoResponseMapper.toResponse(platoServicePort.guardarPlato(idProp,platoModel));
     }
 

@@ -10,7 +10,13 @@ public class PedidoResponseDto {
 
     private Long id;
 
+    private Long idCliente;
+
     private Date fecha;
 
-    private boolean estado;
+    private String estado;
+
+    private Long idChef;
+
+    private Long restaurant;
 }

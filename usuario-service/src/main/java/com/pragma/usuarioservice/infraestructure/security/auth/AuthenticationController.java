@@ -1,8 +1,7 @@
-package com.pragma.usuarioservice.configuration.auth;
+package com.pragma.usuarioservice.infraestructure.security.auth;
 
-import com.pragma.usuarioservice.configuration.auth.Request.AuthenticationRequest;
-import com.pragma.usuarioservice.configuration.auth.Request.RegisterRequest;
-import com.pragma.usuarioservice.configuration.auth.Response.AuthenticationResponse;
+import com.pragma.usuarioservice.infraestructure.security.auth.Request.AuthenticationRequest;
+import com.pragma.usuarioservice.infraestructure.security.auth.Response.AuthenticationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private final AuthenticationService service;
-//    @PostMapping("/register")
-//    public ResponseEntity<AuthenticationResponse> register(
-//            @RequestBody RegisterRequest request
-//    ){
-//        return ResponseEntity.ok(service.register(request));
-//    }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> register(

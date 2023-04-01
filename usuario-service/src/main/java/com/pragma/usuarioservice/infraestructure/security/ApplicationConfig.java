@@ -1,4 +1,4 @@
-package com.pragma.usuarioservice.configuration;
+package com.pragma.usuarioservice.infraestructure.security;
 
 import com.pragma.usuarioservice.infraestructure.out.jpa.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;

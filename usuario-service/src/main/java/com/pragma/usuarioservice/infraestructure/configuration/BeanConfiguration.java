@@ -12,7 +12,7 @@ import com.pragma.usuarioservice.infraestructure.out.jpa.mapper.IRolEntityMapper
 import com.pragma.usuarioservice.infraestructure.out.jpa.mapper.IUserEntityMapper;
 import com.pragma.usuarioservice.infraestructure.out.jpa.repository.IRolRepository;
 import com.pragma.usuarioservice.infraestructure.out.jpa.repository.IUserRepository;
-import com.pragma.usuarioservice.infraestructure.security.IEncryptPassword;
+import com.pragma.usuarioservice.infraestructure.security.impl.IEncryptPassword;
 import com.pragma.usuarioservice.infraestructure.security.impl.EncryptPassword;
 import feign.auth.BasicAuthRequestInterceptor;
 import lombok.RequiredArgsConstructor;

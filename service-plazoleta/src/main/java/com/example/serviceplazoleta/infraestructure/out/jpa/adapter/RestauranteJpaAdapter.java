@@ -24,27 +24,11 @@ public class RestauranteJpaAdapter implements IRestaurantePersistencePort {
     private final IRestauranteRepository restauranteRepository;
     private final IRestauranteEntityMapper restauranteEntityMapper;
 
-    private final IUserFeign iUserFeign;
+//    private final IUserFeign iUserFeign;
 //    private final RestTemplate restTemplate;
 
     @Override
     public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
-            UserResponseDto userResponseDto;
-            try {
-                userResponseDto=iUserFeign.obtenerIdUser(restauranteModel.getIdPropietario());
-            }catch(Exception exception) {
-                throw new RuntimeException();
-            }
-            if (!userResponseDto.getRol().getNombre().equals("PROPIETARIO") ){
-                throw new NotRolException("No existe el Propietario ingresado");
-            }
-            if (!restauranteModel.numeroTelefonoValido()){
-                throw new NotRolException("El nuemero de telefono es invalido");
-            }
-            if (!restauranteModel.validarNombre()){
-                throw new NotRolException("El nombre es invalido");
-            }
-
         RestauranteEntity restauranteEntity = restauranteRepository
                 .save(restauranteEntityMapper.toEntity(restauranteModel));
         return restauranteEntityMapper.toRestauranteModel(restauranteEntity);

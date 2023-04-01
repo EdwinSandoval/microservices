@@ -1,5 +1,6 @@
 package com.pragma.usuarioservice.infraestructure.out.jpa.adapter;
 
+import com.pragma.usuarioservice.domain.exception.NoEmailFound;
 import com.pragma.usuarioservice.domain.model.UsuarioModel;
 import com.pragma.usuarioservice.domain.spi.IUsuarioPersistencePort;
 import com.pragma.usuarioservice.infraestructure.exception.NoDataFoundException;
@@ -10,7 +11,9 @@ import com.pragma.usuarioservice.infraestructure.out.jpa.mapper.IUserEntityMappe
 import com.pragma.usuarioservice.infraestructure.out.jpa.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -23,15 +26,12 @@ public class UserJpaAdapter implements IUsuarioPersistencePort {
     @Override
     public UsuarioModel saveUsers(UsuarioModel usuarioModel) {
 
-        if (userRepository.findByEmail(usuarioModel.getEmail()).isPresent()){
-            throw new UserAlreadyExistsException("Ya existe el usuario");
-        }
-        if (usuarioModel.validarEmail() && usuarioModel.numeroTelefonoValido() && usuarioModel.dniValidate()){
-            UserEntity userEntity = userRepository.save(userEntityMapper.toEntity(usuarioModel));
-            return userEntityMapper.toUserModel(userEntity);
-        }
-        throw new UserNameNotValidateException("Usuario invalido");
+//        if (userRepository.findByEmail(usuarioModel.getEmail()).isPresent()){
+//            throw new UserAlreadyExistsException("Ya existe el usuario");
+//        }
 
+        UserEntity userEntity=userRepository.save(userEntityMapper.toEntity(usuarioModel));
+        return userEntityMapper.toUserModel(userEntity);
     }
 
     @Override
@@ -51,7 +51,8 @@ public class UserJpaAdapter implements IUsuarioPersistencePort {
 
     @Override
     public UsuarioModel getEmail(String email) {
-        return userEntityMapper.toUserModel(userRepository.findByEmail(email)
+        Optional<UserEntity> entity=userRepository.findByEmail(email);
+        return userEntityMapper.toUserModel(entity
                 .orElseThrow(NoDataFoundException::new));
     }
 

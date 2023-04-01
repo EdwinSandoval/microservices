@@ -49,19 +49,7 @@ public class PlatoEntity {
     @OneToMany(mappedBy = "platos")
     private List<Pedido_PlatosEntity> pedidoPlatos;
 
-    public PlatoEntity(Long id, String nombre, String descripcion, int precio, String urlImagen,
-                       Boolean activo, CategoriaEntity categoria, RestauranteEntity restaurant,
-                       List<Pedido_PlatosEntity> pedidoPlatos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.urlImagen = urlImagen;
-        this.activo = true;
-        this.categoria = categoria;
-        this.restaurant = restaurant;
-        this.pedidoPlatos = pedidoPlatos;
-    }
+
 
     //idcategoria,idrestaurante
 }

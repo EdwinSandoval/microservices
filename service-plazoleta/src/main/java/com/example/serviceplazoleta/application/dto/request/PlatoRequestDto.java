@@ -19,6 +19,7 @@ public class PlatoRequestDto {
     private String descripcion;
 
     @Positive
+    @NotBlank(message = "El campo precio es obligatorio")
     private int precio;
 
     @NotBlank (message = "El campo url es obligatorio")

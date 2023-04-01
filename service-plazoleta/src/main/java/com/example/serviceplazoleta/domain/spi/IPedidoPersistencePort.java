@@ -7,7 +7,7 @@ import java.util.List;
 public interface IPedidoPersistencePort {
 
 
-    PedidoModel guardarPedido(PedidoModel pedidoModel);
+    void guardarPedido(PedidoModel pedidoModel);
 
     List<PedidoModel> listarPedidos();
 }

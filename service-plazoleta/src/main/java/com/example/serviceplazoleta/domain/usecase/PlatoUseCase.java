@@ -50,6 +50,7 @@ public class PlatoUseCase implements IPlatoServicePort {
 
     @Override
     public PlatoModel guardarPlato(Long idProp,PlatoModel platoModel) {
+        platoModel.setActivo(true);
         PlatoEntity platoEntity=platoEntityMapper.toEntity(platoModel);
         CategoriaEntity categoria = categoriaRepository.findByIdCategoria(platoModel.getCategoria().getIdCategoria());
         RestauranteEntity restaurante = restauranteRepository.findByIdRestaurante(platoModel.getRestaurant().getIdRestaurante());

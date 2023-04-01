@@ -17,7 +17,7 @@ public class PedidoRestController {
 
     private final IPedidoHandler pedidoHandler;
 
-    @PostMapping("/")
+    @PostMapping("/guardar")
     public ResponseEntity<Void> guardarPedido(@RequestBody PedidoRequestDto pedidoRequestDto) {
         pedidoHandler.guardarPedido(pedidoRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);

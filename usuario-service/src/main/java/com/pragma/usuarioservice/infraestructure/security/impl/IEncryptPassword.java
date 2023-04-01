@@ -1,4 +1,4 @@
-package com.pragma.usuarioservice.infraestructure.security;
+package com.pragma.usuarioservice.infraestructure.security.impl;
 
 public interface IEncryptPassword {
 

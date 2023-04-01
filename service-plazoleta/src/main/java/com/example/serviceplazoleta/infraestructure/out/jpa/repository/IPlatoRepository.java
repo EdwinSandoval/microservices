@@ -14,10 +14,6 @@ import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 public interface IPlatoRepository extends JpaRepository<PlatoEntity,Long> {
-//    @Query(value = "select * from plato p group by p.id_categoria",
-//            nativeQuery = true)
-//    List<PlatoEntity> findAllPlatos(Pageable pageable);
-
 
     @Query(value = "select * from plato p " +
             "inner join restaurante r on p.id_restaurante=r.id_restaurante " +
@@ -28,7 +24,6 @@ public interface IPlatoRepository extends JpaRepository<PlatoEntity,Long> {
         "inner join restaurante r on p.id_restaurante=r.id_restaurante " +
         "where r.id_restaurante = :idRestaurante "+
             "order by p.id_categoria asc",
-//            "order by p.id_categoria asc limit 4",
             nativeQuery = true)
     Page<PlatoEntity> agruparPorCategoria(@Param("idRestaurante") Long idRestaurante, Pageable pageable);
 

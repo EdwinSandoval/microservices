@@ -26,15 +26,20 @@ public class ControllerAdvisor {
 //                .body(Collections.singletonMap(MESSAGE, ExceptionResponse.NO_DATA_FOUND.getMessage()));
 //    }
 
-    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String,String> handleValidateException(MethodArgumentNotValidException ex){
-        Map<String,String> errors=new HashMap<String,String >();
-        ex.getBindingResult().getAllErrors().forEach((error)->{
-            String fielName=((FieldError)error).getField();
-            String message=error.getDefaultMessage();
-            errors.put(fielName,message);
-        });
-        return errors;
+//    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public Map<String,String> handleValidateException(MethodArgumentNotValidException ex){
+//        Map<String,String> errors=new HashMap<String,String >();
+//        ex.getBindingResult().getAllErrors().forEach((error)->{
+//            String fielName=((FieldError)error).getField();
+//            String message=error.getDefaultMessage();
+//            errors.put(fielName,message);
+//        });
+//        return errors;
+//    }
+    @ExceptionHandler(value = RuntimeException.class)
+    public ResponseEntity<ErrorDto> runTimeExceptionHandler(RuntimeException ex){
+        ErrorDto error= ErrorDto.builder().message(ex.getMessage()).build();
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }
