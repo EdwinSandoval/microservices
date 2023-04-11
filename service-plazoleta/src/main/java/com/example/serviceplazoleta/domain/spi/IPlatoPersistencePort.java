@@ -10,7 +10,7 @@ import java.util.List;
 public interface IPlatoPersistencePort {
 
 
-    PlatoModel guardarPlato(Long idProp,PlatoModel platoModel);
+    PlatoModel guardarPlato(PlatoModel platoModel);
 
     List<PlatoModel> listarPlatos();
 

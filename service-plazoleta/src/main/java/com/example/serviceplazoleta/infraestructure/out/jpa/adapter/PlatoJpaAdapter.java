@@ -47,7 +47,7 @@ public class PlatoJpaAdapter implements IPlatoPersistencePort {
 //    @Autowired
 //    private RestauranteRestController restauranteRestController;
     @Override
-    public PlatoModel guardarPlato(Long idProp ,PlatoModel platoModel) {
+    public PlatoModel guardarPlato(PlatoModel platoModel) {
         PlatoEntity platoEntity = platoRepository.save(platoEntityMapper.toEntity(platoModel));
         return platoEntityMapper.toPlatoModel(platoEntity);
 //

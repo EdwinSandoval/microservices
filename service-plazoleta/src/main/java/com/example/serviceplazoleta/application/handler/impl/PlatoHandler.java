@@ -32,13 +32,11 @@ public class PlatoHandler  implements IPlatoHandler {
     private final IPlatoServicePort platoServicePort;
     private final IPlatoRequestMapper platoRequestMapper;
     private final IPlatoResponseMapper platoResponseMapper;
-//    private final IPlatoPaginadoDtoMapper iPlatoPaginadoDtoMapper;
 
 
     @Override
     public void guardarPlato(Long idProp,PlatoRequestDto platoRequestDto) {
         PlatoModel platoModel = platoRequestMapper.toPlato(platoRequestDto);
-//        platoModel.setActivo(true);
         platoResponseMapper.toResponse(platoServicePort.guardarPlato(idProp,platoModel));
     }
 

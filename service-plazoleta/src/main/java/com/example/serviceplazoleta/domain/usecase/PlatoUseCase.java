@@ -1,12 +1,15 @@
 package com.example.serviceplazoleta.domain.usecase;
 
 import com.example.serviceplazoleta.domain.api.IPlatoServicePort;
+import com.example.serviceplazoleta.domain.api.IRestauranteServicePort;
+import com.example.serviceplazoleta.domain.model.CategoriaModel;
 import com.example.serviceplazoleta.domain.model.PlatoModel;
+import com.example.serviceplazoleta.domain.model.RestauranteModel;
+import com.example.serviceplazoleta.domain.spi.ICategoriaPersistencePort;
 import com.example.serviceplazoleta.domain.spi.IPlatoPersistencePort;
+import com.example.serviceplazoleta.domain.spi.IRestaurantePersistencePort;
 import com.example.serviceplazoleta.infraestructure.client.IUserFeign;
 import com.example.serviceplazoleta.infraestructure.exception.NoDataFoundException;
-import com.example.serviceplazoleta.infraestructure.out.jpa.entity.CategoriaEntity;
-import com.example.serviceplazoleta.infraestructure.out.jpa.entity.PlatoEntity;
 import com.example.serviceplazoleta.infraestructure.out.jpa.entity.RestauranteEntity;
 import com.example.serviceplazoleta.infraestructure.out.jpa.mapper.ICategoriaEntityMapper;
 import com.example.serviceplazoleta.infraestructure.out.jpa.mapper.IPlatoEntityMapper;
@@ -14,57 +17,58 @@ import com.example.serviceplazoleta.infraestructure.out.jpa.mapper.IRestauranteE
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.ICategoriaRepository;
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IPlatoRepository;
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.IRestauranteRepository;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public class PlatoUseCase implements IPlatoServicePort {
 
     private final IPlatoPersistencePort platoPersistencePort;
+    private final ICategoriaPersistencePort categoriaPersistencePort;
+    private final IRestaurantePersistencePort restaurantePersistencePort;
 
-    private final IPlatoRepository platoRepository;
-    private final ICategoriaRepository categoriaRepository;
-    private final IRestauranteRepository restauranteRepository;
+
     private final IPlatoEntityMapper platoEntityMapper;
     private final ICategoriaEntityMapper categoriaEntityMapper;
     private final IRestauranteEntityMapper restauranteEntityMapper;
     private final IUserFeign iUserFeign;
 
-    public PlatoUseCase(IPlatoPersistencePort platoPersistencePort, IPlatoRepository platoRepository,
-                        ICategoriaRepository categoriaRepository, IRestauranteRepository restauranteRepository,
-                        IPlatoEntityMapper platoEntityMapper, ICategoriaEntityMapper categoriaEntityMapper,
-                        IRestauranteEntityMapper restauranteEntityMapper, IUserFeign iUserFeign) {
+    public PlatoUseCase(IPlatoPersistencePort platoPersistencePort, ICategoriaPersistencePort categoriaPersistencePort,
+                        IRestaurantePersistencePort restaurantePersistencePort, IPlatoEntityMapper platoEntityMapper,
+                        ICategoriaEntityMapper categoriaEntityMapper, IRestauranteEntityMapper restauranteEntityMapper,
+                        IUserFeign iUserFeign) {
         this.platoPersistencePort = platoPersistencePort;
-        this.platoRepository = platoRepository;
-        this.categoriaRepository = categoriaRepository;
-        this.restauranteRepository = restauranteRepository;
+        this.categoriaPersistencePort = categoriaPersistencePort;
+        this.restaurantePersistencePort = restaurantePersistencePort;
         this.platoEntityMapper = platoEntityMapper;
         this.categoriaEntityMapper = categoriaEntityMapper;
         this.restauranteEntityMapper = restauranteEntityMapper;
         this.iUserFeign = iUserFeign;
     }
 
-    //    public PlatoUseCase(IPlatoPersistencePort platoPersistencePort) {
-//        this.platoPersistencePort = platoPersistencePort;
-//    }
-
     @Override
     public PlatoModel guardarPlato(Long idProp,PlatoModel platoModel) {
         platoModel.setActivo(true);
-        PlatoEntity platoEntity=platoEntityMapper.toEntity(platoModel);
-        CategoriaEntity categoria = categoriaRepository.findByIdCategoria(platoModel.getCategoria().getIdCategoria());
-        RestauranteEntity restaurante = restauranteRepository.findByIdRestaurante(platoModel.getRestaurant().getIdRestaurante());
+        PlatoModel platoModel1=platoModel;
+        CategoriaModel categoria=obtenerCategoria(platoModel);
+        RestauranteModel restaurante = obtenerRestaurante(platoModel);
+
         Long idPropietario = restaurante.getIdPropietario();
 
         if (categoria.getIdCategoria()!=null && restaurante.getIdRestaurante()!=null && idPropietario.equals(idProp)) {
-            platoEntity.setCategoria(categoria);
-            platoEntity.setRestaurant(restaurante);
-            return platoEntityMapper.toPlatoModel(platoRepository.save(platoEntity));
+            platoModel1.setCategoria(categoria);
+            platoModel1.setRestaurant(restaurante);
+            return platoPersistencePort.guardarPlato(platoModel1);
 
         }
         throw new NoDataFoundException();
+    }
 
-//        return  platoPersistencePort.guardarPlato(idProp,platoModel);
+    private CategoriaModel obtenerCategoria(PlatoModel platoModel){
+        CategoriaModel categoria=categoriaPersistencePort.obtenerCategoriaId(platoModel.getCategoria().getIdCategoria());
+        return categoria;
+    }  private RestauranteModel obtenerRestaurante(PlatoModel platoModel){
+        RestauranteModel restaurante=restaurantePersistencePort.obtenerRestauranteId(platoModel.getRestaurant().getIdRestaurante());
+        return restaurante;
     }
 
     @Override
@@ -75,49 +79,54 @@ public class PlatoUseCase implements IPlatoServicePort {
 
     @Override
     public void actualizarPlato(PlatoModel platoModel, Long idProp) {
-        PlatoModel platoAntiguo=platoPersistencePort.buscarPlatoId(platoModel.getId());
-        RestauranteEntity restaurante = restauranteRepository.findByIdRestaurante(platoAntiguo.getRestaurant().getIdRestaurante());
+        PlatoModel plato=buscarPlato(platoModel);
+        RestauranteModel restaurante = obtenerRestaurante(plato);
+
         Long idPropietario = restaurante.getIdPropietario();
 
-        if (platoAntiguo!=null && restaurante.getIdRestaurante()!=null && idPropietario.equals(idProp)){
+        if (plato.getId()!=null && restaurante.getIdRestaurante()!=null && idPropietario.equals(idProp)){
 
             PlatoModel platoModelNew=new PlatoModel();
 
-            platoModel.setId(platoAntiguo.getId());
-            platoModel.setNombre(platoAntiguo.getNombre());
-            platoModel.setPrecio(platoModel.getPrecio());
-            platoModel.setDescripcion(platoModel.getDescripcion());
-            platoModel.setUrlImagen(platoAntiguo.getUrlImagen());
-            platoModel.setActivo(platoAntiguo.isActivo());
-            platoModel.setCategoria(platoAntiguo.getCategoria());
-            platoModel.setRestaurant(platoAntiguo.getRestaurant());
+            platoModelNew.setId(plato.getId());
+            platoModelNew.setNombre(plato.getNombre());
+            platoModelNew.setPrecio(platoModel.getPrecio());
+            platoModelNew.setDescripcion(platoModel.getDescripcion());
+            platoModelNew.setUrlImagen(plato.getUrlImagen());
+            platoModelNew.setActivo(plato.isActivo());
+            platoModelNew.setCategoria(plato.getCategoria());
+            platoModelNew.setRestaurant(plato.getRestaurant());
 
-            platoPersistencePort.actualizarPlato(platoModel,idProp);
+            platoPersistencePort.actualizarPlato(platoModelNew,idProp);
         }else{
             throw new NoDataFoundException();
         }
-//        throw new NoDataFoundException();
-//        platoPersistencePort.actualizarPlato(platoModel);
+
+    }
+
+    private PlatoModel buscarPlato(PlatoModel platoModel){
+        PlatoModel platoAntiguo=platoPersistencePort.buscarPlatoId(platoModel.getId());
+        return platoAntiguo;
     }
 
     @Override
     public void actualizarEstadoPlato(PlatoModel platoModel, Long idProp) {
-        PlatoModel platoAntiguo=platoPersistencePort.buscarPlatoId(platoModel.getId());
-        RestauranteEntity restaurante = restauranteRepository.findByIdRestaurante(platoAntiguo.getRestaurant().getIdRestaurante());
+        PlatoModel plato=buscarPlato(platoModel);
+        RestauranteModel restaurante = obtenerRestaurante(platoModel);
         Long idPropietario = restaurante.getIdPropietario();
 
-        if (platoAntiguo!=null && restaurante.getIdRestaurante()!=null && idPropietario.equals(idProp)){
+        if (plato.getId()!=null && restaurante.getIdRestaurante()!=null && idPropietario.equals(idProp)){
 
             PlatoModel platoModelNew=new PlatoModel();
 
-            platoModel.setId(platoAntiguo.getId());
-            platoModel.setNombre(platoAntiguo.getNombre());
-            platoModel.setPrecio(platoAntiguo.getPrecio());
-            platoModel.setDescripcion(platoAntiguo.getDescripcion());
-            platoModel.setUrlImagen(platoAntiguo.getUrlImagen());
-            platoModel.setActivo(platoModel.isActivo());
-            platoModel.setCategoria(platoAntiguo.getCategoria());
-            platoModel.setRestaurant(platoAntiguo.getRestaurant());
+            platoModelNew.setId(plato.getId());
+            platoModelNew.setNombre(plato.getNombre());
+            platoModelNew.setPrecio(plato.getPrecio());
+            platoModelNew.setDescripcion(plato.getDescripcion());
+            platoModelNew.setUrlImagen(plato.getUrlImagen());
+            platoModelNew.setActivo(platoModel.isActivo());
+            platoModelNew.setCategoria(plato.getCategoria());
+            platoModelNew.setRestaurant(plato.getRestaurant());
 
             platoPersistencePort.actualizarPlato(platoModel,idProp);
         }else{

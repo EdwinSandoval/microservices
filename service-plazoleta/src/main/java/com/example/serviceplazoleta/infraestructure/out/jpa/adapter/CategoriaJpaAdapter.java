@@ -26,6 +26,12 @@ public class CategoriaJpaAdapter implements ICategoriaPersistencePort {
     }
 
     @Override
+    public CategoriaModel obtenerCategoriaId(Long idRest) {
+        return categoriaEntityMapper.toCategoriaModel(categoriaRepository.findById(idRest)
+                .orElseThrow(NoDataFoundException::new));
+    }
+
+    @Override
     public List<CategoriaModel> listarCategorias() {
         List<CategoriaEntity> entityList = categoriaRepository.findAll();
         if (entityList.isEmpty()) {

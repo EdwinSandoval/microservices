@@ -1,9 +1,6 @@
 package com.example.serviceplazoleta.infraestructure.configuration;
 
 import com.example.serviceplazoleta.application.dto.response.User.UserResponseDto;
-import com.example.serviceplazoleta.application.handler.IPedidoPlatoHandler;
-import com.example.serviceplazoleta.application.mapper.IPedidoPlatoRequestMapper;
-import com.example.serviceplazoleta.application.mapper.IPedidoPlatoResponseMapper;
 import com.example.serviceplazoleta.configuration.auth.Details.DetailsUser;
 import com.example.serviceplazoleta.configuration.auth.Details.IDetailsUserMapper;
 import com.example.serviceplazoleta.domain.api.*;
@@ -15,7 +12,6 @@ import com.example.serviceplazoleta.infraestructure.out.jpa.mapper.*;
 import com.example.serviceplazoleta.infraestructure.out.jpa.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -97,8 +93,8 @@ public class BeanConfiguration {
     @Bean
     public IPlatoServicePort platoServicePort() {
 
-        return new PlatoUseCase(platoPersistencePort(),platoRepository, categoriaRepository,restauranteRepository,
-                platoEntityMapper,categoriaEntityMapper,restauranteEntityMapper,iUserFeign);
+        return new PlatoUseCase(platoPersistencePort(), categoriaPersistencePort(),restaurantePersistencePort(),
+               platoEntityMapper,categoriaEntityMapper,restauranteEntityMapper,iUserFeign);
     }
 
     //****************************************************************************
