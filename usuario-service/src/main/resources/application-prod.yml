@@ -4,11 +4,12 @@
 spring:
     profile: prod
     datasource:
-      url: jdbc:mysql://localhost:3306/usuario
-      username: root
+      url: jdbc:mysql://database-plazoleta.cs2p2calnqse.us-east-2.rds.amazonaws.com:3306/usuario
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: admin
       password: sandoval
 
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#    show-sql: true
+#    jpa:
+#      hibernate:
+#        ddl-auto: update
+#      show-sql: true

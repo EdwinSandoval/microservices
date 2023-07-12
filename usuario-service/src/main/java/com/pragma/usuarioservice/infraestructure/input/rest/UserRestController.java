@@ -81,10 +81,10 @@ public class UserRestController {
         if (errors.hasErrors()){
             throwError(errors);
         }
-//        if (idRol.equals(3)){
+
             userHandler.saveUsers(userRequestDto,4L);
             return new ResponseEntity<>(HttpStatus.CREATED);
-//        }
+
     }
 
     @GetMapping("/listar")
