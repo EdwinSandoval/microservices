@@ -10,15 +10,15 @@ import lombok.Setter;
 @Setter
 public class ObtenerRestauranteIdResponseDto {
 
-//    private String nombre;
-//
-//    private String direccion;
-//
-//    private String telefono;
-//
-//    private String urlLogo;
-//
-//    private String nit;
+    private String nombre;
+
+    private String direccion;
+
+    private String telefono;
+
+    private String urlLogo;
+
+    private String nit;
 //
     private Long idPropietario;
 }
