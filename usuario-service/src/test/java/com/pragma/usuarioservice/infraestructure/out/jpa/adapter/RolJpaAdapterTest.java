@@ -42,7 +42,7 @@ class RolJpaAdapterTest {
         UsuarioModel expectedUser = UsuarioModelBuilder.getUsurioModelPasswordEncrypt();
         Long idRol = 1L;
 
-        Mockito.when(encryptPassword.encryptPassword(usuario.getPassword())).thenReturn("qwerty");
+        Mockito.when(encryptPassword.encryptPassword(usuario.getPassword())).thenReturn(expectedUser.getPassword());
         Mockito.when(rolPersistencePort.getRoleById(idRol)).thenReturn(RoleModelBuilder.getRolModel());
         Mockito.when(usuarioPersistencePort.saveUsers(any(UsuarioModel.class))).thenReturn(usuario);
 
@@ -52,26 +52,6 @@ class RolJpaAdapterTest {
         verify(usuarioPersistencePort,times(1)).saveUsers(any(UsuarioModel.class));
 
 
-        /*
-        //Dao todo lo q se tiene de insumo
-        //yo como usuario hago la solicitud de guardar un pokemon
-        RolModel rolEsperado=new RolModel();
-        rolEsperado.setId(1L);
-        rolEsperado.setNombre("administardor");
-        rolEsperado.setDescripcion("crea restaurante");
-
-        RolModel rolModel=new RolModel();
-        rolModel.setId(1L);
-        rolModel.setNombre("administardor");
-        rolModel.setDescripcion("crea restaurante");
-
-        //when se usa cuando sucede algo
-        //le envio los datos correctamente
-        when(rolEntityMapper.toRolModel(any())).thenReturn(rolEsperado);
-        rolJpaAdapter.saveRols(rolModel);
-        verify(rolRepository.save(any(RolEntity.class)));
-
-         */
     }
 
 

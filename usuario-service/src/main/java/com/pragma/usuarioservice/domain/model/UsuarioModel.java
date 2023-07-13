@@ -121,7 +121,7 @@ public class UsuarioModel {
         String numero=this.celular;
         if (numero.substring(0,1).equals("+") && numero.substring(1,numero.length()).matches("[0-9]*") ||
                 numero.substring(0,numero.length()).matches("[0-9]*")  ){
-            System.out.println("holaaaaaaaaaaa "+numero.substring(0,numero.length())+" val "+numero.substring(0,1).equals("+"));
+//            System.out.println("holaaaaaaaaaaa "+numero.substring(0,numero.length())+" val "+numero.substring(0,1).equals("+"));
             return true;
         }
         return false;
