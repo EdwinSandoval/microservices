@@ -22,14 +22,20 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
+    Long idCliente;
+
+    @Column(nullable = false)
     private Date fecha;
 
-    @Column
-    private boolean estado;
+    @Column(nullable = false)
+    private String estado;
+
+    @Column(nullable = false)
+    private Long idChef;
 
     @ManyToOne
-    @JoinColumn(name = "idRestaurante")
+    @JoinColumn(name = "idRestaurante" ,nullable = false)
     private RestauranteEntity restaurant;
 
     @OneToMany(mappedBy = "pedido")

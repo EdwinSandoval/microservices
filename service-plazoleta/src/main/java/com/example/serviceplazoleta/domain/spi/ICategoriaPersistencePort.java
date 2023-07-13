@@ -8,5 +8,7 @@ public interface ICategoriaPersistencePort {
 
     CategoriaModel guardarCategoria(CategoriaModel categoriaModel);
 
+    CategoriaModel obtenerCategoriaId(Long idRest);
+
     List<CategoriaModel> listarCategorias();
 }

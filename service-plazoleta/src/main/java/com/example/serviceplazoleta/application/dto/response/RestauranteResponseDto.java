@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class RestauranteResponseDto {
 
-    private Long id;
+    private Long idRestaurante;
 
     private String nombre;
 

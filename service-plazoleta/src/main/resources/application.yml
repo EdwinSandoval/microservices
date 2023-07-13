@@ -36,11 +36,11 @@ appDescription: "Pragma usuario"
 
 ---
 spring:
-
   profile: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/plazoleta2
-    username: root
+    url: jdbc:mysql://database-plazoleta.cs2p2calnqse.us-east-2.rds.amazonaws.com:3306/plazoleta
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: admin
     password: sandoval
 
 #appVersion: "1.0.0"

@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class PlatoCategoriaRequestdto {
-    private Long id;
+    private Long idCategoria;
 
 }
