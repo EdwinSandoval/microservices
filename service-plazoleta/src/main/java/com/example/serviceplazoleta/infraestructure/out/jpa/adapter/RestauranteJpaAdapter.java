@@ -21,40 +21,13 @@ public class RestauranteJpaAdapter implements IRestaurantePersistencePort {
     private final IRestauranteEntityMapper restauranteEntityMapper;
 
     private final IUserFeign iUserFeign;
-//    private final RestTemplate restTemplate;
 
     @Override
     public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
-            UserResponseDto userResponseDto;
-
-                userResponseDto=iUserFeign.obtenerId(restauranteModel.getIdPropietario());
-
-            if (!userResponseDto.getRol().getNombre().equals("propietario")){
-                throw new NotRolException("No existe propietario");
-            }
         RestauranteEntity restauranteEntity = restauranteRepository
                 .save(restauranteEntityMapper.toEntity(restauranteModel));
         return restauranteEntityMapper.toRestauranteModel(restauranteEntity);
     }
-
-    ////////////////////////////////////////
-//    @Override
-//    public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
-//        if (restauranteRepository.findById(restauranteModel.getId()).isPresent()) {
-//            throw new RestaurantExistsException("Existe restaurante");
-//        }
-//        return restauranteModel;
-//    }
-        ///////////////////////////////////
-
-//        UserResponseDto userResponseDto=new UserResponseDto();
-////        UserResponseDto userResponseDto= iUserRestaurante.guardarUsuario(new UserResponseDto(restauranteModel.getIdPropietario())).getBody();
-//
-//        restauranteModel.setIdPropietario(userResponseDto.getId());
-//       return  restauranteRepository.save(restauranteModel);
-
-
-
 
 
     @Override
