@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.9'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id "org.sonarqube" version "4.2.1.3168"
 }
 
 group = 'com.example'
@@ -13,7 +14,13 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
-
+sonar {
+	properties {
+		property "sonar.projectKey", "EdwinSandoval_microservices"
+		property "sonar.organization", "edwinsandoval"
+		property "sonar.host", "https://sonarcloud.io"
+	}
+}
 repositories {
 	mavenCentral()
 }
