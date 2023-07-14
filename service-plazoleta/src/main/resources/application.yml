@@ -25,6 +25,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+#sonar:
+#  token: 32c1f56f1a380cbda7c41a2bbde8222c3345b4cc
+
 #eureka:
 #  #  client:
 #  #    fetch-registry: false

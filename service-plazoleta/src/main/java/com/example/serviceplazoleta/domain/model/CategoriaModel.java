@@ -21,6 +21,9 @@ public class CategoriaModel {
         this.descripcion = descripcion;
     }
 
+    public CategoriaModel() {
+    }
+
     public Long getIdCategoria() {
         return idCategoria;
     }

@@ -43,7 +43,4 @@ public class RestauranteHandler  implements IRestauranteHandler {
 //        platoResponseMapper.toResponseId(platoModel)
     }
 
-
-
-
 }

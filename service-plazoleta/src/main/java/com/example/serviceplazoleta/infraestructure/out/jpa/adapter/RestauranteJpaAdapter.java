@@ -20,7 +20,6 @@ public class RestauranteJpaAdapter implements IRestaurantePersistencePort {
     private final IRestauranteRepository restauranteRepository;
     private final IRestauranteEntityMapper restauranteEntityMapper;
 
-    private final IUserFeign iUserFeign;
 
     @Override
     public RestauranteModel guardarRestaurante(RestauranteModel restauranteModel) {
