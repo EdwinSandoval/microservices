@@ -29,6 +29,7 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests().antMatchers(POST,"/api/v1/user/guardarCliente").permitAll();
         http.authorizeHttpRequests().antMatchers(GET,"/api/v1/user/listar").hasAuthority(ADMINISTRADOR.name());
         http.authorizeHttpRequests().antMatchers(GET,"/api/v1/user/**").permitAll();//.hasAuthority(administrador.name());
+        http.authorizeHttpRequests().antMatchers(POST,"/api/v1/user/guardarAdmin").hasAuthority(ADMINISTRADOR.name());//.hasAuthority(administrador.name());
         http.authorizeHttpRequests().antMatchers(POST,"/api/v1/auth/**","swagger-ui/**").permitAll();
         http.authorizeHttpRequests().antMatchers(GET,"/swagger-ui/**", "/swagger-resources/**", "/api/v1/user/client/**",
                 "/v3/api-docs/**", "/v2/api-docs/**","/configuration/**").permitAll();

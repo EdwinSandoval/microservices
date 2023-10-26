@@ -30,7 +30,9 @@ public class UsersUseCase  implements IUsuarioServicePort {
     }
     @Override
     public void saveUsers(UsuarioModel usuarioModel, Long idRol) {
-        if (usuarioModel.validarEmail() && usuarioModel.numeroTelefonoValido() && usuarioModel.dniValidate()){
+        UsuarioModel usuarioBuscado=usuarioPersistencePort.getEmail(usuarioModel.getEmail());
+
+        if (usuarioBuscado==null && usuarioModel.validarEmail() && usuarioModel.numeroTelefonoValido() && usuarioModel.dniValidate()){
             String encoderPassword=encryptPassword.encryptPassword(usuarioModel.getPassword());
             usuarioModel.setPassword(encoderPassword);
             usuarioModel.setRol(rolPersistencePort.getRoleById(idRol));

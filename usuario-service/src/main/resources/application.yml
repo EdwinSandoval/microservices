@@ -5,12 +5,8 @@ server:
 spring:
   application:
     name: usuario-service
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/usuario2
-#    username: root
-#    password: sandoval
   profiles:
-        active: prod
+        active: dev
 
   jpa:
     hibernate:
@@ -28,20 +24,20 @@ spring:
 
   profile: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/usuario
+    url: jdbc:mysql://localhost:3306/usuario_plazoleta
     username: root
     password: sandoval
 
 ---
-spring:
-
-  profile: prueba
-  datasource:
-    url: jdbc:mysql://localhost:3306/usuario2
-    username: root
-    password: sandoval
-
-appDescription: "Pragma usuario"
+#spring:
+#
+#  profile: prueba
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/usuario2
+#    username: root
+#    password: sandoval
+#
+#appDescription: "Pragma usuario"
 #appVersion: "1.0.0"
 
 #//LOS ESPACIOS ENTRE ETIQUETAS SON MUY IMPORTANTES
